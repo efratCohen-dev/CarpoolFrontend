@@ -1,12 +1,11 @@
-import react from 'react'
+import React from 'react'
 import Drawer from '@mui/material/Drawer';
-
-const drawerWidth=240;
-
-const Search=()=>{
-return(
+import Sign from '../login/Sign';
+const drawerWidth = 240;
+const Search = () => {
+  return (
     <>
-    <Drawer
+      <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -18,8 +17,9 @@ return(
         variant="permanent"
         anchor="right"
       >
+        <Sign />
       </Drawer>
     </>
-)
+  )
 }
 export default Search;
