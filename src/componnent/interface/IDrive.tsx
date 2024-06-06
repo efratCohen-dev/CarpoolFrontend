@@ -3,9 +3,14 @@ export interface IDrive {
     id: ObjectId,
     driver:ObjectId,
     leavingTime:Date,
-    target:{
-        city:string,
-        street:string,
+    startingPoint:{
+        city:String,
+        street:String,
+        numBuild:Number
+    },
+    destination:{
+        city:String,
+        street:String,
         numBuild:Number
     },
     price: Number,
