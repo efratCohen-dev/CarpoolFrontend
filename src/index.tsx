@@ -3,13 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { configureStore } from '@reduxjs/toolkit';
+import Drive from './store/Drive'
+import Driver from './store/Driver'
+import { Provider } from 'react-redux';
+
+const myStore = configureStore({
+  reducer: {
+    Drive,
+    Driver,
+  }
+})
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={myStore}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
