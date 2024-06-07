@@ -8,8 +8,14 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
+import { HTTP } from '../../HTTPpage.contents';
+import { IDriver } from '../interface/IDriver';
+import { ObjectId } from 'mongodb';
+// import { Login } from '@mui/icons-material';
 
 const Sign = () => {
+    const [resCreate, create] = useCreate<IDriver>(HTTP.DRIVERURL);
+    const [resLogin, login] = useLogin(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
     const [maxWidth, setMaxWidth] = useState<DialogProps['maxWidth']>('sm');
@@ -36,9 +42,16 @@ const Sign = () => {
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         console.log(driver);
-        // create()
+
+        signUP ? create({
+            id: new ObjectId(),
+            name: driver.Username,
+            password: driver.Password,
+            email: driver.Email,
+            phone: driver.Tel
+        }) : login({ name: driver.Username, password: driver.Password });
     }
-    
+
     return (
         <React.Fragment>
             <Button onClick={handleClickOpen} size="medium">
