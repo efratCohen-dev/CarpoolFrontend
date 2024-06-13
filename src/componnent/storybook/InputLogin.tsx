@@ -8,7 +8,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 interface InputLoginProps {
     placeorder: string;
     typ: string;
-    onChange: (value: string) => void;
+    onChange: (value: String) => void;
 
 };
 

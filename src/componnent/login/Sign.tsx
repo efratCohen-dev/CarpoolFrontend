@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import InputLogin from '../storybook/InputLogin';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
+import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -11,18 +11,20 @@ import Fab from '@mui/material/Fab';
 import { HTTP } from '../../HTTPpage.contents';
 import { IDriver } from '../interface/IDriver';
 import { ObjectId } from 'mongodb';
+import useCreate from '../../hooks/Create';
+import { IDrive } from '../interface/IDrive';
 // import { Login } from '@mui/icons-material';
 
 const Sign = () => {
-    const [resCreate, create] = useCreate<IDriver>(HTTP.DRIVERURL);
-    const [resLogin, login] = useLogin(HTTP.DRIVERURL);
+    const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
+    // const [resLogin, login] = useLogin(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
-    const [maxWidth, setMaxWidth] = useState<DialogProps['maxWidth']>('sm');
+    // const [maxWidth, setMaxWidth] = useState<DialogProps>['maxWidth']>('sm');
     const [signUP, setSignUP] = useState(false);
     const [submit, setSubmit] = useState(true);
 
-    const [driver, setDriver] = useState({ Username: null, Password: null, Email: null, Tel: null })
+    const [driver, setDriver] = useState({ Username: null, Password: "null", Email: "null", Tel: 999 })
     const handleInputChange = (attribute: string, value: any) => {
         setDriver(driver => ({
             ...driver,
@@ -43,13 +45,17 @@ const Sign = () => {
         event.preventDefault();
         console.log(driver);
 
-        signUP ? create({
-            id: new ObjectId(),
+        signUP ? axiosDataCreate({
+            // id:ObjectId("665c3dde0d9958401cf0a1b9"),
             name: driver.Username,
             password: driver.Password,
             email: driver.Email,
             phone: driver.Tel
-        }) : login({ name: driver.Username, password: driver.Password });
+         }) : null
+        //login({ name: driver.Username, password: driver.Password });
+        // axiosDataCreate(driver)
+
+
     }
 
     return (
@@ -61,7 +67,7 @@ const Sign = () => {
             </Button>
             <Dialog
                 fullWidth={fullWidth}
-                maxWidth={maxWidth}
+                // maxWidth={maxWidth}
                 open={open}
                 onClose={handleClose}
             >

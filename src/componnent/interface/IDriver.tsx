@@ -6,3 +6,10 @@ export interface IDriver {
     email:string,
     phone:number
 };
+/**
+ *
+ */
+// constructor(driver) {
+  
+    
+// }
