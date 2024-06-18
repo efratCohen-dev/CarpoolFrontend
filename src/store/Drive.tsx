@@ -1,9 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-import {IDrive} from "../componnent/interface/IDrive";
+import { createSlice } from '@reduxjs/toolkit';
+import { IDrive } from '../componnent/interface/IDrive';
+import { RootState } from '../Store';
 
-const initValue = {
-    drives: [] as IDrive[]
-}
+const initValue: { drives: IDrive[] }  =  {
+    drives:[
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
+        {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] }
+    ]
+};
 
 const DriveSlice = createSlice({
     name: "drive",

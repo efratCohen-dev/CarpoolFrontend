@@ -1,10 +1,12 @@
 import Search from '../src/componnent/search/Search';
-import './App.css';
+import Rivka from './componnent/drives/RIvka';
+
 function App() {
   return (
-    <>
-     <Search/>
-    </>
-  );
+    <div>
+      {/* <Search/> */}
+      <Rivka/>
+    </div>
+      );
 }
-export default App;
+export default App
