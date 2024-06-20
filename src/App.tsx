@@ -4,7 +4,7 @@ import Rivka from './componnent/drives/RIvka';
 function App() {
   return (
     <div>
-      {/* <Search/> */}
+      <Search/>
       <Rivka/>
     </div>
       );
