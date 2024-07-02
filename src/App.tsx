@@ -1,10 +1,10 @@
 import Search from '../src/componnent/search/Search';
-import './App.css';
+
 function App() {
   return (
-    <>
-     <Search/>
-    </>
+    <div>
+      <Search />
+    </div>
   );
 }
-export default App;
+export default App
