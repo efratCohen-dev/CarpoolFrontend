@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import InputLogin from '../storybook/inputLogin';
+import InputLogin from '../storybook/InputLogin';
 import { useDispatch } from 'react-redux';
 import useCreate from '../../hooks/Create';
 import { HTTP } from '../../HTTPpage.contents';
@@ -14,9 +14,10 @@ import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
 const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
-const SignIn = () => {
+const SignIn = ({ onClick }: { onClick: () => void }, {setTitle:bool}) => {
+
   const dispatch = useDispatch();
-  const { axiosDataCreate } = useCreate(HTTP.DRIVERURL); 
+  const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
   const [sign, setSign] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,15 +29,19 @@ const SignIn = () => {
       phone: parseInt(data.get('tel')?.toString() || '0', 10)
     };
     try {
-      console.log("newDriver",newDriver);
-      
-      await axiosDataCreate(newDriver); 
+      console.log("newDriver", newDriver);
+
+      await axiosDataCreate(newDriver);
       dispatch(createDriver({ newDriver }));
     } catch (error) {
       console.error('Error creating driver:', error);
     }
-
+    onClick();
   };
+  const signChange = () => {
+    setSign(!sign);
+    changeTitle();
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -69,8 +74,8 @@ const SignIn = () => {
               sx={{ mt: 3, mb: 2 }}
             >Sign Up</Button>
             {!sign ?
-              <Button size="small" onClick={() => setSign(!sign)}>אין לך חשבון?</Button>
-              : <Button size="small" onClick={() => setSign(!sign)}>יש לך חשבון?</Button>
+              <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
+              : <Button size="small" onClick={signChange}>signיש לך חשבון?</Button>
             }
           </Box>
         </Box>
