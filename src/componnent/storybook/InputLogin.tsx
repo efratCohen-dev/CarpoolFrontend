@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { Grid, TextField } from "@mui/material";
-interface InputLoginProps {
-    placeorder: string;
-    name: string;
-    typ: string;
-    regexPattern?: string; 
-}
+import { IInput } from "../interface/IInput";
 
-const InputLogin: React.FC<InputLoginProps> = ({ placeorder, name, typ, regexPattern }) => {
+
+const InputLogin: React.FC<IInput> = ({ placeorder, nameInput, typ, regexPattern }) => {
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
 
@@ -17,7 +13,7 @@ const InputLogin: React.FC<InputLoginProps> = ({ placeorder, name, typ, regexPat
         try {
             patternRegExp = new RegExp(regexPattern);
         } catch (error) {
-            console.error('Invalid regex pattern:', error);
+            console.error(`Invalid regex pattern: ${placeorder}`, error);
         }
     }
 
@@ -37,10 +33,10 @@ const InputLogin: React.FC<InputLoginProps> = ({ placeorder, name, typ, regexPat
             <TextField
                 type={typ}
                 autoComplete="given-name"
-                name={name}
+                name={nameInput}
                 required = {true}
                 fullWidth
-                id={name}
+                id={nameInput}
                 label={placeorder}
                 autoFocus
                 onChange={handleChange}
