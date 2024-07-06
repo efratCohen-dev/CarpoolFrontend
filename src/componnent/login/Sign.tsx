@@ -40,6 +40,8 @@ const Sign: React.FC<Props> = ({ title, FormProps,open,handleClose }) => {
     //     setOpen(false);
     // };
 
+    
+
     const onSubmit: SubmitHandler<FormData> = (data) => {
         console.log(data);
     };

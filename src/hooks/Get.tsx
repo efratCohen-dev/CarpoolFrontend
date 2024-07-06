@@ -1,10 +1,11 @@
 import axios from "axios"
+import { ObjectId } from "mongodb"
 import { useState } from "react"
 
 const useGet = (url: string) => {
 
     const [res, setRes] = useState([])
-    const axiosData = async () => {
+    const axiosData = async (id?:ObjectId) => {
         try {
             const get = await axios.get(url)
             setRes(get.data)

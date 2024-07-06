@@ -5,7 +5,7 @@ import AddDriver from '../storybook/addDrive';
 import { useState } from 'react';
 const drawerWidth = 240;
 
-const Search = ({handleClose}:{handleClose: () => void},{open:boolean}) => { 
+const Search = ({handleClose}:{handleClose: () => void}) => { 
   const inputs: IInput[] = [
     { placeorder: 'שם משתמש', nameInput: 'userName', typ: 'text', regexPattern: '^(?=.*[A-Z])[A-Za-z]+$' },
     { placeorder: 'סיסמה', nameInput: 'password', typ: 'password', regexPattern: '\w' },
