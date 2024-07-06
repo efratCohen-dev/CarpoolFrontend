@@ -69,17 +69,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose }) => {
                 <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
               ))
               }
-
-              {/* <InputLogin placeorder={'שם משתמש'} name={'userName'} typ={'text'} regexPattern={'^(?=.*[A-Z])[A-Za-z]+$'} />
-              <InputLogin placeorder={'סיסמה'} name={'password'} typ={'password'} /> */}
-              {/* {sign ?
-
-                <>
-                  <InputLogin placeorder={'מייל'} nameInput={'email'} typ={'text'} regexPattern={'^[\\w]{6,}+(@{1})([\w]{5,9}+\.{1})+[\w-]{2,4}$'} />
-                  <InputLogin placeorder={'נייד'} nameInput={'tel'} typ={'text'} regexPattern={'^[0]{1}[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$'} />
-
-                </> : null
-              } */}
+            
             </Grid>
             <Button
               type="submit"

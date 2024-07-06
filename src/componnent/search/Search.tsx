@@ -3,9 +3,11 @@ import Sign from '../login/Sign';
 import { IInput } from '../interface/IInput';
 import AddDriver from '../storybook/addDrive';
 import { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
+
 const drawerWidth = 240;
 
-const Search = ({handleClose}:{handleClose: () => void}) => { 
+const Search = () => { 
   const inputs: IInput[] = [
     { placeorder: 'שם משתמש', nameInput: 'userName', typ: 'text', regexPattern: '^(?=.*[A-Z])[A-Za-z]+$' },
     { placeorder: 'סיסמה', nameInput: 'password', typ: 'password', regexPattern: '\w' },
@@ -29,8 +31,8 @@ const Search = ({handleClose}:{handleClose: () => void}) => {
         variant="permanent"
         anchor="right"
       >
-        <AddDriver handleClose={handleClose} />
-        <Sign title={'להתחברות הכנס שם משתמש וסיסמה'} open={open} FormProps={inputs} handleClose={handleClose}/>
+        {/* <AddDriver handleClose={handleClose} /> */}
+        <Sign title={'להתחברות הכנס שם משתמש וסיסמה'} FormProps={inputs} Add={AddIcon}/>
       </Drawer>
     </>
   )

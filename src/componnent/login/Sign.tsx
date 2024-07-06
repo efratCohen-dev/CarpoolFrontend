@@ -14,17 +14,17 @@ import SignIn from './signIn';
 import Join from './join';
 import { IInput } from '../interface/IInput';
 import AddDriver from '../storybook/addDrive';
+import * as iconsMaterial from '@mui/icons-material';
 interface Props {
     FormProps: IInput[];
     title: string;
-    open:any;
-    handleClose: () => void;
+    Add:iconsMaterial.SvgIconComponent;
 }
 
-const Sign: React.FC<Props> = ({ title, FormProps,open,handleClose }) => {
+const Sign: React.FC<Props> = ({ title, FormProps,Add }) => {
 
     const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
-    // const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
     const [signUP, setSignUP] = useState(false);
 
@@ -40,7 +40,14 @@ const Sign: React.FC<Props> = ({ title, FormProps,open,handleClose }) => {
     //     setOpen(false);
     // };
 
-    
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
         console.log(data);
@@ -54,6 +61,11 @@ const Sign: React.FC<Props> = ({ title, FormProps,open,handleClose }) => {
 
     return (
         <React.Fragment>
+            <Button onClick={handleClickOpen}>
+                <Fab>
+                    <Add/>
+                </Fab>
+            </Button>
 
             <Dialog
                 fullWidth={fullWidth}

@@ -6,20 +6,15 @@ import DriversUI from './componnent/drivers/DriversUI';
 
 function App() {
 
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
 
   return (
     <div>
       {/* <MyDrives/> */}
       {/* <DriversUI/> */}
-      {/* <Search handleClose={handleClose} open={open}/> */}
-      <Join handleClose={handleClose}/>
+      <Search/>
+      {/* <Join handleClose={handleClose}/> */}
+      <Join/>
     </div>
   );
 }
