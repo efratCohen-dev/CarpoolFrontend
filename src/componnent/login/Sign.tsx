@@ -11,26 +11,20 @@ import { HTTP } from '../../HTTPpage.contents';
 import useCreate from '../../hooks/Create';
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import SignIn from './signIn';
-interface FormData {
-    Username: string;
-    Password: string;
-    Email?: string;
-    Tel?: string;
+import Join from './join';
+import { IInput } from '../interface/IInput';
+import AddDriver from '../storybook/addDrive';
+import * as iconsMaterial from '@mui/icons-material';
+interface Props {
+    FormProps: IInput[];
+    title: string;
+    Add:iconsMaterial.SvgIconComponent;
 }
 
-const Sign: React.FC = () => {
-    const { register, handleSubmit, control } = useForm<FormData>({
-        defaultValues: {
-            Username: "",
-            Password: "",
-            Email: "",
-            Tel: ""
-        }
-    });
+const PopUP: React.FC<Props> = ({ title, FormProps,Add }) => {
 
     const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
-    const [title, setTitle] = useState('להתחברות הכנס שם משתמש וסיסמה');
     const [fullWidth, setFullWidth] = useState(true);
     const [signUP, setSignUP] = useState(false);
 
@@ -38,31 +32,41 @@ const Sign: React.FC = () => {
         // Handle input change if needed
     };
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    // };
+
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
+
 
     const handleClose = () => {
         setOpen(false);
     };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
         console.log(data);
     };
-    
+
 
 
     const changeTitle = useCallback(() => {
-        setTitle('הכנס כמשתמש חדש')
+        // setTitle('הכנס כמשתמש חדש')
     }, [title]);
 
     return (
         <React.Fragment>
-            <Button onClick={handleClickOpen} size="medium">
+            <Button onClick={handleClickOpen}>
                 <Fab>
-                    <AddIcon />
+                    <Add/>
                 </Fab>
             </Button>
+
             <Dialog
                 fullWidth={fullWidth}
                 open={open}
@@ -73,11 +77,14 @@ const Sign: React.FC = () => {
                     <DialogContentText>
                         {title}
                     </DialogContentText>
-                    <SignIn onClick={handleClose} setTitle={setTitle} />
+                    {/* <ChildComponent onClick={handleClose} /> */}
+                    {/* setTitle={setTitle} */}
+                    {/* <Join onClick={handleClose}/> */}
+                    <SignIn handleClose={handleClose} FormProps={FormProps} />
                 </DialogContent>
             </Dialog>
         </React.Fragment>
     );
 };
 
-export default Sign;
+export default PopUP;

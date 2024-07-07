@@ -12,9 +12,17 @@ import { HTTP } from '../../HTTPpage.contents';
 import { createDriver } from '../../store/Driver';
 import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
+import { IInput } from '../interface/IInput';
+import { List } from '@mui/material';
 const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
-const SignIn = ({ onClick }: { onClick: () => void }, {setTitle:bool}) => {
+interface Props {
+  FormProps: IInput[];
+  handleClose: () => void;
+};
+
+const SignIn: React.FC<Props> = ({ FormProps, handleClose }) => {
+  console.log("FormProps", FormProps);
 
   const dispatch = useDispatch();
   const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
@@ -36,11 +44,11 @@ const SignIn = ({ onClick }: { onClick: () => void }, {setTitle:bool}) => {
     } catch (error) {
       console.error('Error creating driver:', error);
     }
-    onClick();
+    handleClose();
   };
   const signChange = () => {
     setSign(!sign);
-    changeTitle();
+    // changeTitle();
   }
 
   return (
@@ -57,16 +65,11 @@ const SignIn = ({ onClick }: { onClick: () => void }, {setTitle:bool}) => {
         >
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <InputLogin placeorder={'שם משתמש'} name={'userName'} typ={'text'} regexPattern={'^(?=.*[A-Z])[A-Za-z]+$'} />
-              <InputLogin placeorder={'סיסמה'} name={'password'} typ={'password'} />
-              {sign ?
-
-                <>
-                  <InputLogin placeorder={'מייל'} name={'email'} typ={'text'} regexPattern={'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'} />
-                  <InputLogin placeorder={'נייד'} name={'tel'} typ={'text'} regexPattern={'^[0]{1}[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$'} />
-
-                </> : null
+              {FormProps.map((input) => (
+                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+              ))
               }
+            
             </Grid>
             <Button
               type="submit"
