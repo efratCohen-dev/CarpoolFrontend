@@ -18,11 +18,14 @@ const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
+  login:String;
   handleClose: () => void;
 };
 
-const SignIn: React.FC<Props> = ({ FormProps, handleClose }) => {
+const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
   console.log("FormProps", FormProps);
+  console.log("login",login);
+  
 
   const dispatch = useDispatch();
   const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
@@ -75,7 +78,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose }) => {
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >Sign Up</Button>
+            >{login}</Button>
             {!sign ?
               <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
               : <Button size="small" onClick={signChange}>signיש לך חשבון?</Button>

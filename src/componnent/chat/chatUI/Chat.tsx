@@ -38,9 +38,12 @@ const Chat: React.FC<Props> = ({ name, room }) => {
     }, [history, name]);
 
     useEffect(() => {
-        socket.on("message", (msg: any) => {
+        socket.on("sendMessage", (msg: any) => {
             setMessages(messages => [...messages, msg]);
         });
+
+        // socket.emit('message', message, () => setMessage(''));
+        // setMessage('');
 
         socket.on("notification", (notif: any) => {
             toast({
@@ -64,7 +67,8 @@ const Chat: React.FC<Props> = ({ name, room }) => {
         )
 
         socket.emit('sendMessage', message, () => setMessage(''));
-        setMessage('');
+        // setMessage('');
+   
     };
 
 

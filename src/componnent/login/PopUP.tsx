@@ -1,27 +1,24 @@
 import React, { useState, useCallback } from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import { HTTP } from '../../HTTPpage.contents';
 import useCreate from '../../hooks/Create';
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { SubmitHandler, Controller } from "react-hook-form";
 import SignIn from './signIn';
-import Join from './join';
 import { IInput } from '../interface/IInput';
 import AddDriver from '../storybook/addDrive';
 import * as iconsMaterial from '@mui/icons-material';
 interface Props {
     FormProps: IInput[];
-    title: string;
+    title: String[];
     Add: iconsMaterial.SvgIconComponent;
 }
 
-const PopUP: React.FC<Props> = ({ title, FormProps, Add }) => {
+const PopUP: React.FC<Props> = ({ FormProps, title, Add }) => {
 
     const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
@@ -63,15 +60,15 @@ const PopUP: React.FC<Props> = ({ title, FormProps, Add }) => {
                 open={open}
                 onClose={handleClose}
             >
-                <DialogTitle>כניסה כנהג</DialogTitle>
+                <DialogTitle> {title[0]}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        {title}
+                        {title[1]}
                     </DialogContentText>
                     {/* <ChildComponent onClick={handleClose} /> */}
                     {/* setTitle={setTitle} */}
                     {/* <Join onClick={handleClose}/> */}
-                    <SignIn handleClose={handleClose} FormProps={FormProps} />
+                    <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]}/>
                 </DialogContent>
             </Dialog>
         </React.Fragment>
