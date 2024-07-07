@@ -6,10 +6,10 @@ function App() {
 
   return (
     <div>
-      <DriversUI/>
-      {/* <Search/> */}
+      {/* <DriversUI/> */}
+      <Search/>
       {/* <Join handleClose={handleClose}/> */}
-      {/* <Join/> */}
+      <Join/>
     </div>
   );
 }
