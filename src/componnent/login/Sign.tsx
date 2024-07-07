@@ -21,7 +21,7 @@ interface Props {
     Add:iconsMaterial.SvgIconComponent;
 }
 
-const Sign: React.FC<Props> = ({ title, FormProps,Add }) => {
+const PopUP: React.FC<Props> = ({ title, FormProps,Add }) => {
 
     const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
@@ -87,4 +87,4 @@ const Sign: React.FC<Props> = ({ title, FormProps,Add }) => {
     );
 };
 
-export default Sign;
+export default PopUP;

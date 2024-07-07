@@ -1,5 +1,5 @@
 import Drawer from '@mui/material/Drawer';
-import Sign from '../login/Sign';
+import PopUP from '../login/Sign';
 import { IInput } from '../interface/IInput';
 import AddDriver from '../storybook/addDrive';
 import { useState } from 'react';
@@ -31,8 +31,7 @@ const Search = () => {
         variant="permanent"
         anchor="right"
       >
-        {/* <AddDriver handleClose={handleClose} /> */}
-        <Sign title={'להתחברות הכנס שם משתמש וסיסמה'} FormProps={inputs} Add={AddIcon}/>
+        <PopUP title={'להתחברות הכנס שם משתמש וסיסמה'} FormProps={inputs} Add={AddIcon}/>
       </Drawer>
     </>
   )

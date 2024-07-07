@@ -1,4 +1,4 @@
-import Sign from './Sign';
+import PopUP from './Sign';
 import { IInput } from '../interface/IInput';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -11,7 +11,7 @@ const Join = () => {
   ]
 
   return (
-    <Sign title={'הצטרפות לנסיעה'}  FormProps={inputs} Add={AddIcon}/>
+    <PopUP title={'הצטרפות לנסיעה'}  FormProps={inputs} Add={AddIcon}/>
   );
 }
 export default Join

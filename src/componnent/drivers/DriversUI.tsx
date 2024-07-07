@@ -2,7 +2,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { HTTP } from "../../HTTPpage.contents";
 import useGet from "../../hooks/Get";
 import { getAll } from "../../store/Driver";
-import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import React, { Suspense, useEffect, useState } from "react";
 import { AppDispatch, RootState } from "../../Store";
 import EastIcon from '@mui/icons-material/East';
@@ -10,6 +10,9 @@ import { Route } from "@mui/icons-material";
 // import MyDrives from "../drives/MyDrives";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { ObjectId } from 'mongodb';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
 
 import '../../App.css'
 import MyDrives from "../drives/MyDrives";
@@ -36,7 +39,13 @@ const DriversUI = () => {
     // }
 
     // const [profil, setProfil] = useState('')
+    const rrr = ['333333', '5555555', '88888888888']
     let profil = '';
+    const [expanded, setExpanded] = React.useState<string | false>('panel1');
+    const handleChange =
+        (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+            setExpanded(newExpanded ? panel : false);
+        };
 
     return (
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -44,67 +53,58 @@ const DriversUI = () => {
                 drivers.map((d) => {
                     return (
                         <>
-                            <Divider variant="inset" component="li" />
+                            <Accordion onChange={handleChange('panel1')}>
+                                {/* <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"> */}
+                                <AccordionSummary
+                                    expandIcon={<ArrowDownwardIcon />}
+                                    aria-controls="panel1-content"
+                                    id="panel1-header"
+                                >
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                            <Avatar alt="Cindy Baker" />
+                                        </ListItemAvatar>
+                                        <div className="allDrivers">
+                                            <ListItemText
 
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                    {/* {
-                                        // setProfil( d.name )
-                                        profil = d.name
-                                    } */}
-                                    <Avatar alt="Cindy Baker" />
-                                    {/* <Avatar alt="Cindy Baker" src={d.name[0]} /> */}
-                                    {/* <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" /> */}
+                                                primary={d.name}
+                                                secondary={
+                                                    <React.Fragment>
+                                                        <Typography
+                                                            sx={{ display: 'inline' }}
+                                                            component="span"
+                                                            variant="body2"
+                                                            color="text.primary"
+                                                        >
+                                                            מייל
+                                                        </Typography>
+                                                        {d.email}
+                                                        <br />
+                                                        <Typography
+                                                            sx={{ display: 'inline' }}
+                                                            component="span"
+                                                            variant="body2"
+                                                            color="text.primary"
+                                                        >
+                                                            נייד
+                                                        </Typography>
+                                                        {d.phone}
 
-                                </ListItemAvatar>
-                                <div className="allDrivers">
-                                    <ListItemText
+                                                    </React.Fragment>
+                                                }
+                                            />
+                                        </div>
+                                    </ListItem >
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    {/* <Divider variant="inset" component="li" /> */}
+                                    <MyDrives />
+                                </AccordionDetails>
+                                <Divider variant="inset" component="li" />
+                            </Accordion>
 
-                                        primary={d.name}
-                                        secondary={
-                                            <React.Fragment>
-                                                <Typography
-                                                    sx={{ display: 'inline' }}
-                                                    component="span"
-                                                    variant="body2"
-                                                    color="text.primary"
-                                                >
-                                                    מייל
-                                                </Typography>
-                                                {d.email}
-                                                <br />
-                                                <Typography
-                                                    sx={{ display: 'inline' }}
-                                                    component="span"
-                                                    variant="body2"
-                                                    color="text.primary"
-                                                >
-                                                    נייד
-                                                </Typography>
-                                                {d.phone}
-
-                                            </React.Fragment>
-
-
-                                        }
-                                    />
-                                    {/* <button onClick={handleOnclick(d.id)}><ArrowBackIcon /></button> */}
-                                    {/* <a> */}
-                                    {/* <EastIcon><MyDrives /></EastIcon> */}
-                                    <ArrowBackIcon><MyDrives /></ArrowBackIcon>
-                                    {/* </a> */}
-                                </div>
-                            </ListItem >
-                            {/* <a>
-                                <EastIcon><MyDrives /></EastIcon>
-                            </a> */}
-                            {/* <Routes>
-                                <Route element={<Suspense fallback={<h1>loading..</h1>}><MyDrives /></Suspense>}><Route />
-
-                            </Routes> */}
-
-                        </>)
+                        </>
+                    )
                 })
             }
         </List >

@@ -1,20 +1,15 @@
-import { useState } from 'react';
 import Search from '../src/componnent/search/Search';
 import Join from './componnent/login/join';
 import DriversUI from './componnent/drivers/DriversUI';
-// import MyDrives from './componnent/drives/MyDrives';
 
 function App() {
 
-
-
   return (
     <div>
-      {/* <MyDrives/> */}
-      {/* <DriversUI/> */}
-      <Search/>
+      <DriversUI/>
+      {/* <Search/> */}
       {/* <Join handleClose={handleClose}/> */}
-      <Join/>
+      {/* <Join/> */}
     </div>
   );
 }
