@@ -4,7 +4,7 @@ import Sign from '../login/Sign';
 const drawerWidth = 240;
 const Search = () => {
   return (
-    <>
+    <div dir="rtl">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -19,7 +19,7 @@ const Search = () => {
       >
         <Sign />
       </Drawer>
-    </>
+    </div>
   )
 }
 export default Search;
