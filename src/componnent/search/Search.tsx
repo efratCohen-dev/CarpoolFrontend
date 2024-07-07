@@ -18,7 +18,7 @@ const Search = () => {
 
 
   return (
-    <>
+    <div dir="rtl">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -33,7 +33,7 @@ const Search = () => {
       >
         <PopUP title={['כניסה כנהג','להתחברות הכנס שם משתמש וסיסמה']} FormProps={inputs} Add={AddIcon}/>
       </Drawer>
-    </>
+    </div>
   )
 }
 export default Search;
