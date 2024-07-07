@@ -1,15 +1,8 @@
 import { ObjectId } from 'mongodb';
 export interface IDriver {
-    id: ObjectId,
+    id?: ObjectId,
     name: String,
-    password:string,
-    email:string,
+    password:String,
+    email:String,
     phone:number
 };
-/**
- *
- */
-// constructor(driver) {
-  
-    
-// }

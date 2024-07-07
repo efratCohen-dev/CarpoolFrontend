@@ -11,7 +11,6 @@ import { IDriver } from '../interface/IDriver';
 import { ObjectId } from 'mongodb';
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
 interface TablePaginationActionsProps {
     count: number;
     page: number;
@@ -21,7 +20,6 @@ interface TablePaginationActionsProps {
         newPage: number,
     ) => void;
 }
-
 
 const Rivka = () => {
     const dispatch = useDispatch();
@@ -36,6 +34,10 @@ const Rivka = () => {
 
     const drives = useAppSelector((state) => state.DriveSlice.drives);
     console.log("drive", drives);
+    // useEffect(() => {
+    //     axiosData();
+    //     useAppDispatch(getAll({ res: res }));
+    //   });
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
