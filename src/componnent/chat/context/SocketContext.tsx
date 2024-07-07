@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode } from 'react';
 import io, { Socket } from 'socket.io-client';
+import { HTTP } from '../../../HTTPpage.contents';
 
 // Define the type for context value
 type SocketContextType = Socket;
@@ -14,8 +15,9 @@ type SocketProviderProps = {
 
 // SocketProvider component
 const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
-    const ENDPOINT = 'https://socket-chat-ak.herokuapp.com/';
-    const socket = io(ENDPOINT, { transports: ['websocket', 'polling'] });
+    const socket = io('http://localhost:8787/', { transports: ['websocket', 'polling'] });
+    // const socket = io('http://localhost:8787/massage', { transports: ['websocket', 'polling'] });
+
 
     return (
         <SocketContext.Provider value={socket}>

@@ -1,19 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
-import {MainContext} from '../context/MainContext';
+import { MainContext } from '../context/MainContext';
 import { SocketContext } from '../context/SocketContext';
-import { Box, Flex, Heading, IconButton, Text, Menu, Button, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { FiList } from 'react-icons/fi';
+import { Box, Flex, Heading, IconButton, Text, Menu, Button, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BiMessageDetail } from 'react-icons/bi';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { useToast } from "@chakra-ui/react";
 import './ChatStyle.scss';
-import {UsersContext} from '../context/UsersContext';
-import { log } from 'console';
+import { UsersContext } from '../context/UsersContext';
 
-const Chat: React.FC = () => {
-    const { name, room, setName, setRoom } = useContext(MainContext);
+interface Props {
+    name: String;
+    room: String;
+}
+
+const Chat: React.FC<Props> = ({ name, room }) => {
+
+    console.log("chatommponent name room", name, room);
+
+
+    // MainContext
+    // const { name, room, setName, setRoom } = useContext(MainContext);
     const socket = useContext(SocketContext);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState<any[]>([]);
@@ -46,13 +55,24 @@ const Chat: React.FC = () => {
     }, [socket, toast]);
 
     const handleSendMessage = () => {
+
+        // socket.emit('new', name, room, () => {
+        //     console.log("client new room", room);
+        // });
+        socket.emit('new', { name, room }, () =>
+            console.log('client new')
+        )
+
         socket.emit('sendMessage', message, () => setMessage(''));
         setMessage('');
     };
 
+
+
+
     const logout = () => {
-        setName(''); 
-        setRoom('');
+        // setName(''); 
+        // setRoom('');
         history.push('/');
         // history.go(0);
     };

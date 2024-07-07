@@ -13,14 +13,14 @@ const Chat = () => {
             //   setMessages([...messages, message]);
         });
 
-        socket.on('userList', (userList) => {
-            //   setUsers(userList);
-            console.log(userList);
-        });
+        // socket.on('userList', (userList) => {
+        //     //   setUsers(userList);
+        //     console.log(userList);
+        // });
 
         return () => {
             socket.off('message');
-            socket.off('userList');
+            // socket.off('userList');
         };
     }, [messages]);
 
