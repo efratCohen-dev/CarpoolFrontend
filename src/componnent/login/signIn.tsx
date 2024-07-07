@@ -5,18 +5,30 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import InputLogin from '../storybook/inputLogin';
+import InputLogin from '../storybook/InputLogin';
 import { useDispatch } from 'react-redux';
 import useCreate from '../../hooks/Create';
 import { HTTP } from '../../HTTPpage.contents';
 import { createDriver } from '../../store/Driver';
 import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
+import { IInput } from '../interface/IInput';
+import { List } from '@mui/material';
 const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
-const SignIn = () => {
+interface Props {
+  FormProps: IInput[];
+  login:String;
+  handleClose: () => void;
+};
+
+const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
+  console.log("FormProps", FormProps);
+  console.log("login",login);
+  
+
   const dispatch = useDispatch();
-  const { axiosDataCreate } = useCreate(HTTP.DRIVERURL); 
+  const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
   const [sign, setSign] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,15 +40,19 @@ const SignIn = () => {
       phone: parseInt(data.get('tel')?.toString() || '0', 10)
     };
     try {
-      console.log("newDriver",newDriver);
-      
-      await axiosDataCreate(newDriver); 
+      console.log("newDriver", newDriver);
+
+      await axiosDataCreate(newDriver);
       dispatch(createDriver({ newDriver }));
     } catch (error) {
       console.error('Error creating driver:', error);
     }
-
+    handleClose();
   };
+  const signChange = () => {
+    setSign(!sign);
+    // changeTitle();
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -52,25 +68,20 @@ const SignIn = () => {
         >
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <InputLogin placeorder={'שם משתמש'} name={'userName'} typ={'text'} regexPattern={'^(?=.*[A-Z])[A-Za-z]+$'} />
-              <InputLogin placeorder={'סיסמה'} name={'password'} typ={'password'} />
-              {sign ?
-
-                <>
-                  <InputLogin placeorder={'מייל'} name={'email'} typ={'text'} regexPattern={'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'} />
-                  <InputLogin placeorder={'נייד'} name={'tel'} typ={'text'} regexPattern={'^[0]{1}[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$'} />
-
-                </> : null
+              {FormProps.map((input) => (
+                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+              ))
               }
+            
             </Grid>
             <Button
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >Sign Up</Button>
+            >{login}</Button>
             {!sign ?
-              <Button size="small" onClick={() => setSign(!sign)}>אין לך חשבון?</Button>
-              : <Button size="small" onClick={() => setSign(!sign)}>יש לך חשבון?</Button>
+              <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
+              : <Button size="small" onClick={signChange}>signיש לך חשבון?</Button>
             }
           </Box>
         </Box>

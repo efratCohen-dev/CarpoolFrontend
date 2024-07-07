@@ -5,6 +5,8 @@ import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import Join from './componnent/login/join';
+import DriversUI from './componnent/drivers/DriversUI';
 
 function App() {
   const theme = (outerTheme: Theme) =>
@@ -18,8 +20,11 @@ function App() {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
-        <Search/>
+          {/* <DriversUI/> */ }
+        <Search />
         <Rivka />
+        {/* <Join handleClose={handleClose}/> */}
+        <Join />
       </ThemeProvider>
     </CacheProvider>
   );
