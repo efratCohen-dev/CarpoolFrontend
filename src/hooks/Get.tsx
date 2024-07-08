@@ -10,7 +10,7 @@ const useGet = (url: string) => {
             const get = await axios.get(url)
             setRes(get.data)
         } catch {
-            console.log("error get")
+            console.log("error get",url)
         }
     }
     return { res, axiosData }

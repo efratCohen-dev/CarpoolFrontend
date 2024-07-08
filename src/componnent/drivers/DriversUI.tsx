@@ -15,7 +15,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 
 import '../../App.css'
-import MyDrives from "../drives/MyDrives";
+import MyDrives from '../drives/MyDrives'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -39,7 +39,6 @@ const DriversUI = () => {
     // }
 
     // const [profil, setProfil] = useState('')
-    const rrr = ['333333', '5555555', '88888888888']
     let profil = '';
     const [expanded, setExpanded] = React.useState<string | false>('panel1');
     const handleChange =
@@ -98,7 +97,7 @@ const DriversUI = () => {
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     {/* <Divider variant="inset" component="li" /> */}
-                                    <MyDrives />
+                                    <MyDrives driver={d}/>
                                 </AccordionDetails>
                                 <Divider variant="inset" component="li" />
                             </Accordion>

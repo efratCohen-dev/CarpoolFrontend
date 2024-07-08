@@ -17,13 +17,13 @@ import { IDriver } from "../interface/IDriver";
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface Props {
-    drive:IDrive;
-    driver:IDriver;
+    drive: IDrive;
+    driver: IDriver;
 }
 
 
-const OneDrive:React.FC<Props> = ({drive,driver}) => {
-    const [currentDriver, setCurrentDriver] = useState<String|undefined>("Efrat");
+const OneDrive: React.FC<Props> = ({ drive, driver }) => {
+    const [currentDriver, setCurrentDriver] = useState<String | undefined>("Efrat");
     const addPassenger = (d: IDrive) => {
         d.passengers = [...d.passengers, "new"]
         // updateDrive(d)
@@ -40,7 +40,7 @@ const OneDrive:React.FC<Props> = ({drive,driver}) => {
                     primary={
                         <FlexBetween>
                             <Flex>
-                                <Avatar sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{`${currentDriver?.slice(0,1)}`}</Avatar>
+                                <Avatar sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{`${currentDriver?.slice(0, 1)}`}</Avatar>
                                 <div>{`${currentDriver}`}</div>
                             </Flex>
                             <Flex>

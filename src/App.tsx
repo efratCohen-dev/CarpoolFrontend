@@ -20,9 +20,9 @@ function App() {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
-          {/* <DriversUI/> */ }
+        <DriversUI />
         {/* <Search /> */}
-        <Rivka />
+        {/* <Rivka /> */}
         {/* <Join handleClose={handleClose}/> */}
         {/* <Join /> */}
       </ThemeProvider>
