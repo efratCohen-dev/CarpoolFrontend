@@ -21,10 +21,10 @@ function App() {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
           {/* <DriversUI/> */ }
-        <Search />
+        {/* <Search /> */}
         <Rivka />
         {/* <Join handleClose={handleClose}/> */}
-        <Join />
+        {/* <Join /> */}
       </ThemeProvider>
     </CacheProvider>
   );

@@ -6,38 +6,47 @@ import { IDrive } from '../interface/IDrive';
 import { RootState, AppDispatch } from '../../Store';
 import List from '@mui/material/List';
 import OneDrive from './OneDrive';
-import { updateDrive } from '../../store/Drive'
+import { getAll, updateDrive } from '../../store/Drive'
 import { IDriver } from '../interface/IDriver';
 import { ObjectId } from 'mongodb';
+import useGet from '../../hooks/Get';
+import { getAllDrivers } from '../../store/Driver';
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-interface TablePaginationActionsProps {
-    count: number;
-    page: number;
-    rowsPerPage: number;
-    onPageChange: (
-        event: React.MouseEvent<HTMLButtonElement>,
-        newPage: number,
-    ) => void;
-}
+// interface TablePaginationActionsProps {
+//     count: number;
+//     page: number;
+//     rowsPerPage: number;
+//     onPageChange: (
+//         event: React.MouseEvent<HTMLButtonElement>,
+//         newPage: number,
+//     ) => void;
+// }
 
 const Rivka = () => {
+    useEffect(() => {
+        axiosData();
+        dispatch(getAll({ res: res }));
+
+    });
+    const [drivers, setDrivers] = useState<IDriver[]>([])
+    const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVEURL);
+    const { res, axiosData } = useGet(HTTP.DRIVEURL);
     const dispatch = useDispatch();
-    const { res, axiosData } = useGetById(HTTP.DRIVEURL);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [currentDriver, SetCurrentDriver] = useState<IDriver>();
 
-    const getDriver = (id: ObjectId) => {
-        axiosData(id)
+    const getDriver = async (id: ObjectId) => {
+        await axiosDataGetById(id)
+        dispatch(getAllDrivers({ res: resGetById }));
+        setDrivers(useAppSelector((state) => state.DriverSlice.drivers));
+        // const drivers = useAppSelector((state) => state.DriverSlice.drivers);
     }
 
     const drives = useAppSelector((state) => state.DriveSlice.drives);
     console.log("drive", drives);
-    // useEffect(() => {
-    //     axiosData();
-    //     useAppDispatch(getAll({ res: res }));
-    //   });
+
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -57,15 +66,33 @@ const Rivka = () => {
         updateDrive(d)
     }
     return (
-        <div dir="rtl">
-            <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-                {
-                    drives.map((d: IDrive) => (
-                        <OneDrive {...d}/>
-                    ))
-                }
-            </List>
-        </div>
+        <>
+            <p>Rivka</p>
+            <div dir="rtl">
+                <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+                    {
+                        drives.map((d) => {
+                            return (
+                                <>
+                                    {getDriver(d.driver)}{
+                                        drivers.map((driver) => {
+                                            return (
+                                                <>
+                                                    <OneDrive  drive={d} driver={driver} />
+                                                </>
+                                            )
+
+                                        })
+
+                                    }
+
+                                </>
+                            )
+                        })
+                    }
+                </List>
+            </div ></>
+
     );
 }
 export default Rivka;

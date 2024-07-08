@@ -12,10 +12,17 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { FlexColumn, Flex, FlexBetween } from './Drive.styled';
 import Avatar from '@mui/material/Avatar';
 import theme from '../../Theme';
+import { IDriver } from "../interface/IDriver";
 // export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-const OneDrive = (d: IDrive) => {
+interface Props {
+    drive:IDrive;
+    driver:IDriver;
+}
+
+
+const OneDrive:React.FC<Props> = ({drive,driver}) => {
     const [currentDriver, setCurrentDriver] = useState<String|undefined>("Efrat");
     const addPassenger = (d: IDrive) => {
         d.passengers = [...d.passengers, "new"]
@@ -38,12 +45,12 @@ const OneDrive = (d: IDrive) => {
                             </Flex>
                             <Flex>
                                 {
-                                    d.passengers.map((p: String, index: number) =>
+                                    drive.passengers.map((p: String, index: number) =>
                                         <Avatar key={index} sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{p[0]}</Avatar>
                                     )
                                 }
                                 {/* onclick */}
-                                <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(d)}>+</Avatar>
+                                <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar>
                             </Flex>
                         </FlexBetween>
                     }
@@ -55,27 +62,27 @@ const OneDrive = (d: IDrive) => {
                                 variant="body2"
                                 color="text.primary"
                             >
-                                {`${d.places - d.passengers.length} מקומות פנויים`}
+                                {`${drive.places - drive.passengers.length} מקומות פנויים`}
                             </Typography>
                             <Flex>
                                 <FlexColumn>
                                     <Flex>
                                         <CircleOutlinedIcon fontSize='small' />
-                                        <div>{`${d.startingPoint.city} ,`}</div>
-                                        <div>{`${d.startingPoint.street} ,`}</div>
-                                        <div>{`${d.startingPoint.numBuild} `}</div>
+                                        <div>{`${drive.startingPoint.city} ,`}</div>
+                                        <div>{`${drive.startingPoint.street} ,`}</div>
+                                        <div>{`${drive.startingPoint.numBuild} `}</div>
                                     </Flex>
                                     <MoreVertIcon />
                                     <Flex>
                                         <PlaceIcon />
-                                        <div>{`${d.destination.city} ,`}</div>
-                                        <div>{`${d.destination.street} ,`}</div>
-                                        <div>{`${d.destination.numBuild} `}</div>
+                                        <div>{`${drive.destination.city} ,`}</div>
+                                        <div>{`${drive.destination.street} ,`}</div>
+                                        <div>{`${drive.destination.numBuild} `}</div>
                                     </Flex>
                                 </FlexColumn>
                                 <FlexColumn>
-                                    <div>{`יציאה משוערת ב: ${d.leavingTime?.getHours()}:${d.leavingTime?.getMinutes()}`}</div>
-                                    <div>{`עלות הנסיעה: ${d.price} ש"ח`}</div>
+                                    <div>{`יציאה משוערת ב: ${drive.leavingTime?.getHours()}:${drive.leavingTime?.getMinutes()}`}</div>
+                                    <div>{`עלות הנסיעה: ${drive.price} ש"ח`}</div>
                                 </FlexColumn>
                             </Flex>
                         </React.Fragment>

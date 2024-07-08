@@ -1,7 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { HTTP } from "../../HTTPpage.contents";
 import useGet from "../../hooks/Get";
-import { getAll } from "../../store/Driver";
+import { getAllDrivers } from "../../store/Driver";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import React, { Suspense, useEffect, useState } from "react";
 import { AppDispatch, RootState } from "../../Store";
@@ -22,7 +22,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 const DriversUI = () => {
     useEffect(() => {
         axiosData();
-        dispatch(getAll({ res: res }));
+        dispatch(getAllDrivers({ res: res }));
     });
     const { res, axiosData } = useGet(HTTP.DRIVERURL);
     const dispatch = useDispatch();
