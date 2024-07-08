@@ -11,40 +11,35 @@ import { useToast } from "@chakra-ui/react";
 import './ChatStyle.scss';
 import { UsersContext } from '../context/UsersContext';
 
-interface Props {
-    name: String;
-    room: String;
-}
+// interface Props {
+//     name: String;
+//     room: String;
+// }
 
-const Chat: React.FC<Props> = ({ name, room }) => {
-
-    console.log("chatommponent name room", name, room);
-
-
+const Chat = () => {
     // MainContext
-    // const { name, room, setName, setRoom } = useContext(MainContext);
+    const { name, room, setName, setRoom } = useContext(MainContext);
     const socket = useContext(SocketContext);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState<any[]>([]);
-    const history = [{}];
+    const history = { push: String, go: Number };
     const { users } = useContext(UsersContext);
 
     const toast = useToast();
-
+    useEffect(() => {
+        console.log("socket", socket);
+    }, [socket])
     window.onpopstate = e => logout();
 
     useEffect(() => {
         if (!name) history.push('/');
     }, [history, name]);
-
     useEffect(() => {
+        // socket.emit('message', message, () => setMessage(''));
+        // setMessage('');
         socket.on("sendMessage", (msg: any) => {
             setMessages(messages => [...messages, msg]);
         });
-
-        // socket.emit('message', message, () => setMessage(''));
-        // setMessage('');
-
         socket.on("notification", (notif: any) => {
             toast({
                 position: "top",
@@ -55,20 +50,33 @@ const Chat: React.FC<Props> = ({ name, room }) => {
                 isClosable: true,
             });
         });
-    }, [socket, toast]);
+        return () => {
+            socket.off('sendMessage');
+        };
+    }, [toast, socket, messages]);
+
+    useEffect(() => {
+        console.log("messages", messages);
+        // return () => {
+        //     socket.off('sendMessage');
+        // };
+    }, [messages]);
 
     const handleSendMessage = () => {
+        if (message !== '') {
+            // socket.emit('new', name, room, () =>
+            //     console.log('client new')
+            // )
+
+            socket.emit('sendMessage', message, () => setMessage(''));
+            setMessage('');
+        }
 
         // socket.emit('new', name, room, () => {
         //     console.log("client new room", room);
         // });
-        socket.emit('new', { name, room }, () =>
-            console.log('client new')
-        )
 
-        socket.emit('sendMessage', message, () => setMessage(''));
-        // setMessage('');
-   
+
     };
 
 
@@ -78,7 +86,7 @@ const Chat: React.FC<Props> = ({ name, room }) => {
         // setName(''); 
         // setRoom('');
         history.push('/');
-        // history.go(0);
+        history.go(0);
     };
 
 

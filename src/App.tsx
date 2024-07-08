@@ -19,27 +19,29 @@ function App() {
       {/* <Search/> */}
       {/* <Join handleClose={handleClose}/> */}
       {/* <Join/> */}
-      
+
       <ChakraProvider>
         <MainProvider>
           <UsersProvider>
             <SocketProvider>
               <Flex className="App" align='center' justifyContent='center'>
-              {/* <BrowserRouter> */}
-                <Router>
-                  {/* <Switch> */}
-                    {/* <Route path='/' element={<Login name={'r0556721183@gmail.com'} room={'6644bc35072c9bce7ac7500e'}/>} /> */}
-                    {/* <Route path='/chat' element={<Chat name={'r0556721183@gmail.com'} room={'6644bc35072c9bce7ac7500e'}/>} /> */}
-                    <Chat name={'r0556721183@gmail.com'} room={'6644bc35072c9bce7ac7500e'}/>
-                  {/* </Switch> */}
-                </Router>
-              {/* </BrowserRouter> */}
+                <BrowserRouter>
 
-            </Flex>
-          </SocketProvider>
-        </UsersProvider>
-      </MainProvider>
-    </ChakraProvider>
+                  {/* <Switch> */}
+                    <Routes>
+                      <Route path='/' element={<Login />} />
+                      {/* <Route path='/chat' element={<Chat />} /> */}
+
+                    </Routes>
+                    {/* <Chat name={'r0556721183@gmail.com'} room={'6644bc35072c9bce7ac7500e'}/> */}
+                  {/* </Switch> */}
+                </BrowserRouter>
+
+              </Flex>
+            </SocketProvider>
+          </UsersProvider>
+        </MainProvider>
+      </ChakraProvider>
     </div>
   );
 }
