@@ -11,6 +11,7 @@ import { IDriver } from '../interface/IDriver';
 import { ObjectId } from 'mongodb';
 import useGet from '../../hooks/Get';
 import { getAllDrivers } from '../../store/Driver';
+import DriveDriver from './DriveDriver';
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 // interface TablePaginationActionsProps {
@@ -23,7 +24,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 //     ) => void;
 // }
 
-const Rivka = () => {
+const AllDrives = () => {
     useEffect(() => {
         axiosData();
         dispatch(getAll({ res: res }));
@@ -67,14 +68,13 @@ const Rivka = () => {
     }
     return (
         <>
-            <p>Rivka</p>
             <div dir="rtl">
                 <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
                     {
                         drives.map((d) => {
                             return (
                                 <>
-                                    {getDriver(d.driver)}{
+                                    {/* {getDriver(d.driver)}{
                                         drivers.map((driver) => {
                                             return (
                                                 <>
@@ -84,7 +84,8 @@ const Rivka = () => {
 
                                         })
 
-                                    }
+                                    } */}
+                                    <DriveDriver drive={d}/>
 
                                 </>
                             )
@@ -95,4 +96,4 @@ const Rivka = () => {
 
     );
 }
-export default Rivka;
+export default AllDrives;

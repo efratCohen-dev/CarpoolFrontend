@@ -9,6 +9,7 @@ import { IDriver } from "../interface/IDriver";
 import { IDrive } from "../interface/IDrive";
 import { useEffect, useState } from "react";
 import { ObjectId } from "mongodb";
+import { getAll } from "../../store/Drive";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -24,8 +25,8 @@ const MyDrives: React.FC<Props> = ({ driver }) => {
     });
     const GetById = async (id: ObjectId) => {
         await axiosDataGetById(id);
+        getAll(resGetById)
         setDrives(resGetById)
-        // console.log("drives", drives);
     }
 
     return (
