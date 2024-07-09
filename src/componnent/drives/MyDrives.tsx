@@ -1,32 +1,46 @@
-// import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-// import { AppDispatch, RootState } from "../../Store";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../Store";
+// import { getAll } from "../../store/Drive";
 // import useGet from "../../hooks/Get";
-// import { HTTP } from "../../HTTPpage.contents";
+import { HTTP } from "../../HTTPpage.contents";
+import OneDrive from "./OneDrive";
+import useGetById from "../../hooks/GetById";
+import { IDriver } from "../interface/IDriver";
+import { IDrive } from "../interface/IDrive";
+import { useEffect, useState } from "react";
+import { ObjectId } from "mongodb";
 
-// export const useAppDispatch = () => useDispatch<AppDispatch>()
-// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+interface Props {
+    driver: IDriver;
+}
+const MyDrives: React.FC<Props> = ({ driver }) => {
+    const [drives, setDrives] = useState<IDrive[]>([])
+    const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVEURL);
 
-const MyDrives = ()=>{
+    useEffect(() => {
+        driver.id && GetById(driver.id)
+    });
+    const GetById = async (id: ObjectId) => {
+        await axiosDataGetById(id);
+        setDrives(resGetById)
+        // console.log("drives", drives);
+    }
 
-//     // const { res, axiosData } = useGet('HTTP.DRIVERURL'+  `/getMyDriver${/id}`);
-//     // const { res, axiosData } = useGet(`${HTTP.DRIVEURL}/getMyDriver/6644bc35072c9bce7ac7500e`);
-//     const { res, axiosData } = useGet('http://localhost:8787/drive/getMyDriver');
-//     const dispatch = useDispatch();
-//     // axiosData({'6644bc35072c9bce7ac7500e'});
-//     // const drivers = useAppSelector((driver) => driver.DriverSlice.drivers);
-
-//     console.log("dresrivers", res);
-
-    
-
-    return(
+    return (
         <>
-        {/* {
-            res.map((d)=>{
-                < props={d}/>
-            })
-        } */}
-        <p>קומפוננטת ניסעה של אפרת</p></>
+            {drives.length > 0? (drives.map((d) => {
+                return (
+                    <>
+                        <OneDrive drive={d} driver={driver} />
+                    </>
+                )
+            })):
+            <p>אין עדיין נסיעות</p>
+
+            }
+        </>
     )
 }
 export default MyDrives
