@@ -32,7 +32,7 @@ const DriveSlice = createSlice({
                         street: action.payload.newStartingPoint.street,
                         numBuild: action.payload.newStartingPoint.numBuild
                     };
-                    drive.destination = {
+                    drive.target = {
                         city: action.payload.newDestination.city,
                         street: action.payload.newDestination.street,
                         numBuild: action.payload.newDestination.numBuild

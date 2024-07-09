@@ -23,15 +23,17 @@ interface Props {
 
 
 const OneDrive: React.FC<Props> = ({ drive, driver }) => {
-    const [currentDriver, setCurrentDriver] = useState<String | undefined>("Efrat");
+    // console.log("OneDrive",drive,driver);
+    
+    // const [currentDriver, setCurrentDriver] = useState<String | undefined>("Efrat");
     const addPassenger = (d: IDrive) => {
         d.passengers = [...d.passengers, "new"]
         // updateDrive(d)
     }
-    const drivers = useAppSelector((state) => state.DriverSlice.drivers);
-    useEffect(() => {
-        // setCurrentDriver(drivers.find((drv) => { drv.id === d.driver })?.name);
-    }, [])
+    // const drivers = useAppSelector((state) => state.DriverSlice.drivers);
+    // useEffect(() => {
+    //     // setCurrentDriver(drivers.find((drv) => { drv.id === d.driver })?.name);
+    // }, [])
 
     return (
         <>
@@ -40,8 +42,8 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                     primary={
                         <FlexBetween>
                             <Flex>
-                                <Avatar sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{`${currentDriver?.slice(0, 1)}`}</Avatar>
-                                <div>{`${currentDriver}`}</div>
+                                <Avatar sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{`${driver.name?.slice(0, 1)}`}</Avatar>
+                                <div>{`${driver.name}`}</div>
                             </Flex>
                             <Flex>
                                 {
@@ -75,13 +77,13 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                     <MoreVertIcon />
                                     <Flex>
                                         <PlaceIcon />
-                                        <div>{`${drive.destination.city} ,`}</div>
-                                        <div>{`${drive.destination.street} ,`}</div>
-                                        <div>{`${drive.destination.numBuild} `}</div>
+                                        <div>{`${drive.target.city} ,`}</div>
+                                        <div>{`${drive.target.street} ,`}</div>
+                                        <div>{`${drive.target.numBuild} `}</div>
                                     </Flex>
                                 </FlexColumn>
                                 <FlexColumn>
-                                    <div>{`יציאה משוערת ב: ${drive.leavingTime?.getHours()}:${drive.leavingTime?.getMinutes()}`}</div>
+                                    {/* <div>{`יציאה משוערת ב: ${drive.leavingTime?.getHours()}:${drive.leavingTime?.getMinutes()}`}</div> */}
                                     <div>{`עלות הנסיעה: ${drive.price} ש"ח`}</div>
                                 </FlexColumn>
                             </Flex>

@@ -61,7 +61,7 @@ const DriversUI = () => {
                                 >
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
-                                            <Avatar alt="Cindy Baker" />
+                                            <Avatar alt="Cindy Baker">{d.name.slice(0, 1)}</Avatar>
                                         </ListItemAvatar>
                                         <div className="allDrivers">
                                             <ListItemText
@@ -98,6 +98,7 @@ const DriversUI = () => {
                                 <AccordionDetails>
                                     {/* <Divider variant="inset" component="li" /> */}
                                     <MyDrives driver={d}/>
+                                    {/* <p>{d.name}</p> */}
                                 </AccordionDetails>
                                 <Divider variant="inset" component="li" />
                             </Accordion>
