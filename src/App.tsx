@@ -1,5 +1,5 @@
 import Search from '../src/componnent/search/Search';
-import Rivka from './componnent/drives/RIvka';
+import AllDrives from './componnent/drives/AllDrives';
 import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
@@ -20,10 +20,9 @@ function App() {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
-        <DriversUI />
+        {/* <DriversUI /> */}
         {/* <Search /> */}
-        {/* <Rivka /> */}
-        {/* <Join handleClose={handleClose}/> */}
+        <AllDrives />
         {/* <Join /> */}
       </ThemeProvider>
     </CacheProvider>
