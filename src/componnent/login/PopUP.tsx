@@ -1,33 +1,27 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback, Fragment } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Fab from '@mui/material/Fab';
-import { HTTP } from '../../HTTPpage.contents';
-import useCreate from '../../hooks/Create';
-import { SubmitHandler, Controller } from "react-hook-form";
 import SignIn from './signIn';
 import { IInput } from '../interface/IInput';
-import AddDriver from '../storybook/addDrive';
 import * as iconsMaterial from '@mui/icons-material';
 interface Props {
     FormProps: IInput[];
     title: String[];
-    Add: iconsMaterial.SvgIconComponent;
+    Icon: iconsMaterial.SvgIconComponent;
+    url: string;
 }
 
-const PopUP: React.FC<Props> = ({ FormProps, title, Add }) => {
+const PopUP: React.FC<Props> = ({ FormProps, title, Icon, url }) => {
 
-    const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
+    // const { axiosDataCreate } = useCreate(url);
     const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
-    const [signUP, setSignUP] = useState(false);
+    // const [signUP, setSignUP] = useState(false);
 
-    const handleInputChange = (attribute: string, value: any) => {
-        // Handle input change if needed
-    };
 
     // const handleClickOpen = () => {
     //     setOpen(true);
@@ -46,10 +40,6 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add }) => {
     };
 
 
-    const onSubmit: SubmitHandler<FormData> = (data) => {
-        console.log(data);
-    };
-
 
 
     const changeTitle = useCallback(() => {
@@ -57,10 +47,10 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add }) => {
     }, [title]);
 
     return (
-        <React.Fragment>
+        <Fragment>
             <Button onClick={handleClickOpen}>
                 <Fab>
-                    <Add />
+                    <Icon />
                 </Fab>
             </Button>
 
@@ -74,13 +64,10 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add }) => {
                     <DialogContentText>
                         {title[1]}
                     </DialogContentText>
-                    {/* <ChildComponent onClick={handleClose} /> */}
-                    {/* setTitle={setTitle} */}
-                    {/* <Join onClick={handleClose}/> */}
-                    <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]}/>
+                    <SignIn handleClose={handleClose} FormProps={FormProps} loginButton={title[0]} url={url} />
                 </DialogContent>
             </Dialog>
-        </React.Fragment>
+        </Fragment>
     );
 };
 

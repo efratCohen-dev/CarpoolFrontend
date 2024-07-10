@@ -1,4 +1,4 @@
-export interface IInput {
+export interface IInput{
     placeorder: string;
     nameInput: string;
     typ: string;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -13,23 +13,21 @@ import { createDriver } from '../../store/Driver';
 import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
 import { IInput } from '../interface/IInput';
-import { List } from '@mui/material';
 const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
-  login:String;
+  loginButton: String;
   handleClose: () => void;
+  url:string;
 };
 
-const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
-  console.log("FormProps", FormProps);
-  console.log("login",login);
-  
+const SignIn: React.FC<Props> = ({ FormProps, handleClose, loginButton, url }) => {
 
   const dispatch = useDispatch();
-  const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
-  const [sign, setSign] = useState(false)
+  const { axiosDataCreate } = useCreate(url);
+  const [sign, setSign] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,8 +38,6 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
       phone: parseInt(data.get('tel')?.toString() || '0', 10)
     };
     try {
-      console.log("newDriver", newDriver);
-
       await axiosDataCreate(newDriver);
       dispatch(createDriver({ newDriver }));
     } catch (error) {
@@ -68,21 +64,24 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
         >
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {FormProps.map((input) => (
-                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
-              ))
+              {
+                FormProps.map((input) => (
+                  <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+                ))
               }
-            
+              {loginButton === 'כניסה כנהג' &&
+                (!sign ?
+                  <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
+                  : <Button size="small" onClick={signChange}> לך חשבון?</Button>)
+              }
+
             </Grid>
             <Button
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >{login}</Button>
-            {!sign ?
-              <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
-              : <Button size="small" onClick={signChange}>signיש לך חשבון?</Button>
-            }
+            >{loginButton}</Button>
+
           </Box>
         </Box>
       </Container>

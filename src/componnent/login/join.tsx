@@ -1,6 +1,7 @@
 import PopUP from './PopUP';
 import { IInput } from '../interface/IInput';
 import AddIcon from '@mui/icons-material/Add';
+import { HTTP } from '../../HTTPpage.contents';
 
 
 const Join = () => {
@@ -11,7 +12,7 @@ const Join = () => {
   ]
 
   return (
-    <PopUP title={['הצטרפות לנסיעה','הכנס פרטים']}  FormProps={inputs} Add={AddIcon}/>
+    <PopUP title={['הצטרפות לנסיעה','הכנס פרטים']}  FormProps={inputs} Icon={AddIcon} url={HTTP.DRIVEURL}/>
   );
 }
 export default Join

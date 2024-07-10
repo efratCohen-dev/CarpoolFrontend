@@ -4,6 +4,7 @@ import { IInput } from '../interface/IInput';
 import AddDriver from '../storybook/addDrive';
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import { HTTP } from '../../HTTPpage.contents';
 
 const drawerWidth = 240;
 
@@ -31,7 +32,7 @@ const Search = () => {
         variant="permanent"
         anchor="right"
       >
-        <PopUP title={['כניסה כנהג','להתחברות הכנס שם משתמש וסיסמה']} FormProps={inputs} Add={AddIcon}/>
+        <PopUP title={['כניסה כנהג','להתחברות הכנס שם משתמש וסיסמה']} FormProps={inputs} Icon={AddIcon} url={HTTP.DRIVERURL}/>
       </Drawer>
     </div>
   )
