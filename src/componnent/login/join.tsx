@@ -11,7 +11,7 @@ const Join = () => {
   ]
 
   return (
-    <PopUP title={['הצטרפות לנסיעה','הכנס פרטים']}  FormProps={inputs} Add={AddIcon}/>
+    <PopUP title={['הצטרפות לנסיעה','הכנס פרטים']}  FormProps={inputs} Add={AddIcon} driveID={'668d261e0caf05f2e5691f58'}/>
   );
 }
 export default Join

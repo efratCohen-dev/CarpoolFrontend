@@ -34,10 +34,10 @@ function App() {
         {/* <DriversUI /> */}
         {/* <Search /> */}
         {/* <AllDrives /> */}
-        {/* <Join /> */}
+        <Join />
         
 
-        <SideMenu/>
+        {/* <SideMenu/> */}
         {/* <IconMenu Icon={LocalShippingIcon}/> */}
       </ThemeProvider>
     </CacheProvider >

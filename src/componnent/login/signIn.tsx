@@ -14,39 +14,33 @@ import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
 import { IInput } from '../interface/IInput';
 import { List } from '@mui/material';
+import UseGeneralCreate from '../../hooks/GeneralCreate';
+import { ObjectId } from 'mongodb';
 const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
-  login:String;
+  login: String;
+  driveID?: String;
   handleClose: () => void;
+
 };
 
-const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
-  console.log("FormProps", FormProps);
-  console.log("login",login);
-  
+const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => {
 
   const dispatch = useDispatch();
   const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
+  const { AxiosDataGeneralCreate } = UseGeneralCreate();
   const [sign, setSign] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const newDriver: IDriver = {
-      name: data.get('userName')?.toString() || '',
-      password: data.get('password')?.toString() || '',
-      email: data.get('email')?.toString() || '',
-      phone: parseInt(data.get('tel')?.toString() || '0', 10)
-    };
-    try {
-      console.log("newDriver", newDriver);
+    // if (driveID){
+      AxiosDataGeneralCreate(login, data, driveID)
 
-      await axiosDataCreate(newDriver);
-      dispatch(createDriver({ newDriver }));
-    } catch (error) {
-      console.error('Error creating driver:', error);
-    }
+    // }else{
+      // AxiosDataGeneralCreate(login, data);
+    // }
     handleClose();
   };
   const signChange = () => {
@@ -72,7 +66,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
                 <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
               ))
               }
-            
+
             </Grid>
             <Button
               type="submit"
