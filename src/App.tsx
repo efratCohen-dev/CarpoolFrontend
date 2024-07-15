@@ -33,11 +33,11 @@ function App() {
       <ThemeProvider theme={theme}>
         {/* <DriversUI /> */}
         {/* <Search /> */}
-        {/* <AllDrives /> */}
+        <AllDrives />
         {/* <Join /> */}
         
 
-        <SideMenu/>
+        {/* <SideMenu/> */}
         {/* <IconMenu Icon={LocalShippingIcon}/> */}
       </ThemeProvider>
     </CacheProvider >
