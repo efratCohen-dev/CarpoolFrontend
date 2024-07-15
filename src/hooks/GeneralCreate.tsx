@@ -7,6 +7,8 @@ import { HTTP } from "../HTTPpage.contents";
 import { createDriver } from "../store/Driver";
 import useCreatePassenger from "./CreateNewPassenger";
 import { IPassenger } from "../componnent/interface/IPassenger";
+import { IDrive } from "../componnent/interface/IDrive";
+import { createDrive } from "../store/Drive";
 
 // interface Props {
 //     type: String;
@@ -15,7 +17,7 @@ import { IPassenger } from "../componnent/interface/IPassenger";
 
 const GeneralCreate = () => {
     const dispatch = useDispatch();
-    const AxiosDataGeneralCreate = async (type: String, object: any,ID?:string) => {
+    const AxiosDataGeneralCreate = async (type: String, object: any, ID?: string) => {
 
         switch (type) {
             case 'כניסה כנהג':
@@ -47,8 +49,8 @@ const GeneralCreate = () => {
                     };
                     try {
                         console.log("passenger", passenger);
-                        if(ID){
-                            await axiosDataCreatePassenger(passenger,ID);
+                        if (ID) {
+                            await axiosDataCreatePassenger(passenger, ID);
                         }
                         // dispatch(createDriver({ passenger }));
                         //עדכון נסיעה
@@ -61,7 +63,28 @@ const GeneralCreate = () => {
                 }
 
             default:
-                return 'foo';
+                {
+                    const { axiosDataCreate } = useCreate(HTTP.DRIVEURL);
+                    const newDrive: IDrive = {
+                        //הייתי רוצה להכניס את פרטי הנהג ל localStoreg 
+                        //ולשלוף בטופס הזמנה, וכן בשביל כאן לשלוף את התכומה הייחודית
+                        driver: object.get('driver')?.toString() || '',
+                        leavingTime: object.get('leavingTime')?.toString() || '',
+                        startingPoint: object.get('startingPoint')?.toString() ||'',
+                        target: object.get('target')?.toString() ||'',
+                        price: parseInt(object.get('price')?.toString() || '15', 10),
+                        places: parseInt(object.get('places')?.toString() || '4', 10),
+                        passengers:[]
+                    };
+                    try {
+                        console.log("newDrive", newDrive);
+                        await axiosDataCreate(newDrive);
+                        dispatch(createDrive({ newDrive }));
+                    } catch (error) {
+                        console.error('Error creating driver:', error);
+                    }
+
+                }
         }
     }
 

@@ -17,6 +17,6 @@ export interface IDrive {
         numBuild:Number
     },
     price: Number,
-    places: number,
-    passengers:String[]
+    places: Number,
+    passengers:Object[]
 };
