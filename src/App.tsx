@@ -33,8 +33,8 @@ function App() {
       <ThemeProvider theme={theme}>
         {/* <DriversUI /> */}
         {/* <Search /> */}
-        {/* <AllDrives /> */}
-        <Join />
+        <AllDrives />
+        {/* <Join /> */}
         
 
         {/* <SideMenu/> */}

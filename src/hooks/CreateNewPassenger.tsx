@@ -5,7 +5,7 @@ import { ObjectId } from 'mongodb';
 
 const useCreatePassenger = (url: string) => {
 
-    const axiosDataCreatePassenger = async (newData: IPassenger,ID:String) => {
+    const axiosDataCreatePassenger = async (newData: IPassenger,ID:string) => {
         try {
             // const cookies = new Cookies();
          console.log("http://localhost:8787/join/668d261e0caf05f2e5691f58",`${url}/${ID}`);

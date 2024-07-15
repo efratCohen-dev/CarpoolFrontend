@@ -13,9 +13,9 @@ import { IPassenger } from "../componnent/interface/IPassenger";
 //     object: any
 // };
 
-const UseGeneralCreate = () => {
+const GeneralCreate = () => {
     const dispatch = useDispatch();
-    const AxiosDataGeneralCreate = async (type: String, object: any,ID?:String) => {
+    const AxiosDataGeneralCreate = async (type: String, object: any,ID?:string) => {
 
         switch (type) {
             case 'כניסה כנהג':
@@ -67,6 +67,6 @@ const UseGeneralCreate = () => {
 
     return { AxiosDataGeneralCreate }
 }
-export default UseGeneralCreate
+export default GeneralCreate
 
 

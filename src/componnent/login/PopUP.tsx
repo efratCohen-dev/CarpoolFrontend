@@ -16,7 +16,7 @@ import { ObjectId } from 'mongodb';
 interface Props {
     FormProps: IInput[];
     title: String[];
-    driveID?: String;
+    driveID?: string;
     Add: iconsMaterial.SvgIconComponent;
 }
 

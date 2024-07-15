@@ -1,9 +1,13 @@
 import PopUP from './PopUP';
 import { IInput } from '../interface/IInput';
-import AddIcon from '@mui/icons-material/Add';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { ObjectId } from 'mongodb';
 
+interface Props {
+  driveID?: string;
+}
 
-const Join = () => {
+const Join:React.FC<Props> = ({driveID}) => {
 
   const inputs: IInput[] = [
     { placeorder: 'שם מלא', nameInput: 'userName', typ: 'text', regexPattern: '^(?=.*[A-Z])[A-Za-z]+$' },
@@ -11,7 +15,7 @@ const Join = () => {
   ]
 
   return (
-    <PopUP title={['הצטרפות לנסיעה','הכנס פרטים']}  FormProps={inputs} Add={AddIcon} driveID={'668d261e0caf05f2e5691f58'}/>
+    <PopUP title={['הצטרפות לנסיעה','הכנס פרטים']}  FormProps={inputs} Add={GroupAddIcon} driveID={driveID}/>
   );
 }
 export default Join
