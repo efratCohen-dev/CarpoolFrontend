@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import InputLogin from '../storybook/InputLogin';
 import { useDispatch } from 'react-redux';
 import useCreate from '../../hooks/Create';
@@ -14,7 +13,6 @@ import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
 import { IInput } from '../interface/IInput';
 import { List } from '@mui/material';
-const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
@@ -55,7 +53,6 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
   }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -69,7 +66,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               {FormProps.map((input) => (
-                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern}/>
               ))
               }
             
@@ -86,7 +83,6 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
 export default SignIn

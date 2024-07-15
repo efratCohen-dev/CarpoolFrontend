@@ -30,26 +30,28 @@ const InputLogin: React.FC<IInput> = ({ placeorder, nameInput, typ, regexPattern
 
     return (
         <Grid item xs={12} sm={9}>
-            <TextField
-                type={typ}
-                autoComplete="given-name"
-                name={nameInput}
-                required = {true}
-                fullWidth
-                id={nameInput}
-                label={placeorder}
-                autoFocus
-                onChange={handleChange}
-                error={error} 
-                helperText={helperText} 
-                inputProps={{ pattern: patternRegExp?.source }}
-                InputProps={{
-                    inputProps: {
-                        pattern: patternRegExp?.source,
-                        title: "Enter a valid input",
-                    },
-                }}
-            />
+            <div dir="rtl">
+                <TextField
+                    type={typ}
+                    autoComplete="given-name"
+                    name={nameInput}
+                    required={true}
+                    fullWidth
+                    id={nameInput}
+                    label={placeorder}
+                    autoFocus
+                    onChange={handleChange}
+                    error={error}
+                    helperText={helperText}
+                    inputProps={{ pattern: patternRegExp?.source }}
+                    InputProps={{
+                        inputProps: {
+                            pattern: patternRegExp?.source,
+                            title: "Enter a valid input",
+                        },
+                    }}
+                />
+            </div>
         </Grid>
     );
 };

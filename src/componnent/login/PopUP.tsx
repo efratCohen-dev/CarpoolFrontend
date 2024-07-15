@@ -12,6 +12,8 @@ import SignIn from './signIn';
 import { IInput } from '../interface/IInput';
 import AddDriver from '../storybook/addDrive';
 import * as iconsMaterial from '@mui/icons-material';
+import { BackgroundTitle, PopUpConteiner } from './popUp.styled';
+import theme from '../../Theme';
 interface Props {
     FormProps: IInput[];
     title: String[];
@@ -63,23 +65,25 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add }) => {
                     <Add />
                 </Fab>
             </Button>
-
-            <Dialog
-                fullWidth={fullWidth}
-                open={open}
-                onClose={handleClose}
-            >
-                <DialogTitle> {title[0]}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {title[1]}
-                    </DialogContentText>
-                    {/* <ChildComponent onClick={handleClose} /> */}
-                    {/* setTitle={setTitle} */}
-                    {/* <Join onClick={handleClose}/> */}
-                    <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]}/>
-                </DialogContent>
-            </Dialog>
+                <Dialog
+                    fullWidth={fullWidth}
+                    open={open}
+                    onClose={handleClose}
+                    dir={theme.direction}
+                >
+                    <BackgroundTitle color={theme.palette.primary.main}>
+                        <DialogTitle> {title[0]}</DialogTitle>
+                    </BackgroundTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {title[1]}
+                        </DialogContentText>
+                        {/* <ChildComponent onClick={handleClose} /> */}
+                        {/* setTitle={setTitle} */}
+                        {/* <Join onClick={handleClose}/> */}
+                        <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} />
+                    </DialogContent>
+                </Dialog>
         </React.Fragment>
     );
 };
