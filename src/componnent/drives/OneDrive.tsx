@@ -116,16 +116,16 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                 />
             </ListItem>
             <Divider variant="inset" component="li" />
-            {drive.id &&
-                <>
+            {/* {drive.id && */}
+                {/* <> */}
                     <IconButton aria-label="delete" color="primary">
                         <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
                     </IconButton >
                     <IconButton aria-label="delete" color="primary">
                         <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
                     </IconButton>
-                </>
-            }
+                {/* </> */}
+            {/* } */}
         </>
     )
 }
