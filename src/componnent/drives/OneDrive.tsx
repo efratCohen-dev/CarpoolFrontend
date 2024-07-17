@@ -13,6 +13,10 @@ import { FlexColumn, Flex, FlexBetween } from './Drive.styled';
 import Avatar from '@mui/material/Avatar';
 import theme from '../../Theme';
 import { IDriver } from "../interface/IDriver";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { ObjectId } from "mongodb";
+import useDelete from "../../hooks/Delete";
+import { HTTP } from "../../HTTPpage.contents";
 // export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
@@ -23,17 +27,18 @@ interface Props {
 
 
 const OneDrive: React.FC<Props> = ({ drive, driver }) => {
-    // console.log("OneDrive",drive,driver);
-    
-    // const [currentDriver, setCurrentDriver] = useState<String | undefined>("Efrat");
+
     const addPassenger = (d: IDrive) => {
         d.passengers = [...d.passengers, "new"]
-        // updateDrive(d)
     }
-    // const drivers = useAppSelector((state) => state.DriverSlice.drivers);
-    // useEffect(() => {
-    //     // setCurrentDriver(drivers.find((drv) => { drv.id === d.driver })?.name);
-    // }, [])
+
+    const { axiosDataDelete } = useDelete(HTTP.DRIVEURL)
+
+    const deleteDrive = (id: string) => {
+        axiosDataDelete(id);
+        deleteDrive(id);
+    };
+
 
     return (
         <>
@@ -92,6 +97,8 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                 />
             </ListItem>
             <Divider variant="inset" component="li" />
+            {drive.id && <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
+            }
         </>
     )
 }
