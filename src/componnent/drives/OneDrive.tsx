@@ -14,9 +14,12 @@ import Avatar from '@mui/material/Avatar';
 import theme from '../../Theme';
 import { IDriver } from "../interface/IDriver";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { ObjectId } from "mongodb";
 import useDelete from "../../hooks/Delete";
 import { HTTP } from "../../HTTPpage.contents";
+import Join from "../login/join";
+import { Button, IconButton } from "@mui/material";
 // export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
@@ -37,6 +40,14 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
     const deleteDrive = (id: string) => {
         axiosDataDelete(id);
         deleteDrive(id);
+        console.log("deleteDrive", id);
+
+    };
+    const editDrive = (id: string) => {
+        //יפתח חלונית נסיעה עם הפרטים כברירת מחדל ואפשר עריכה.
+        // נצטרך שבקובץ יצירה נאפשר גם עריכה
+        console.log("editDrive", id);
+
     };
 
 
@@ -52,12 +63,20 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                             </Flex>
                             <Flex>
                                 {
-                                    drive.passengers.map((p: String, index: number) =>
-                                        <Avatar key={index} sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{p[0]}</Avatar>
+                                    drive.passengers.map((p: any, index: number) =>
+                                        <Avatar key={index} sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{p.name[0]}</Avatar>
                                     )
                                 }
-                                {/* onclick */}
-                                <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar>
+                                {drive.id &&
+
+                                    // <><h1>vhh {drive.places - drive.passengers.length > 0}</h1>
+                                    <Join driveID={`${drive.id}`} />
+                                    // </>
+
+
+                                }
+
+                                {/* <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar> */}
                             </Flex>
                         </FlexBetween>
                     }
@@ -97,7 +116,15 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                 />
             </ListItem>
             <Divider variant="inset" component="li" />
-            {drive.id && <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
+            {drive.id &&
+                <>
+                    <IconButton aria-label="delete" color="primary">
+                        <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
+                    </IconButton >
+                    <IconButton aria-label="delete" color="primary">
+                        <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
+                    </IconButton>
+                </>
             }
         </>
     )
