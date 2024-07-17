@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 export interface IDrive {
     id?: ObjectId,
-    driver:ObjectId,
+    driver:String,
     // id:string,
     // driver:string,
     leavingTime:Date,

@@ -10,14 +10,13 @@ import useCreate from '../../hooks/Create';
 import { SubmitHandler, Controller } from "react-hook-form";
 import SignIn from './signIn';
 import { IInput } from '../interface/IInput';
-import AddDriver from '../storybook/addDrive';
 import * as iconsMaterial from '@mui/icons-material';
 import { BackgroundTitle, PopUpConteiner } from './popUp.styled';
 import theme from '../../Theme';
 import { ObjectId } from 'mongodb';
 interface Props {
     FormProps: IInput[];
-    title: String[];
+    title: string[];
     driveID?: string;
     Add: iconsMaterial.SvgIconComponent;
 }

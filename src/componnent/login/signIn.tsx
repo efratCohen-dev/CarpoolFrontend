@@ -20,7 +20,7 @@ const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
-  login: String;
+  login: string;
   driveID?: string;
   handleClose: () => void;
 
@@ -34,7 +34,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
   const [sign, setSign] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const data = new FormData(event.currentTarget);    
     // if (driveID){
       AxiosDataGeneralCreate(login, data, driveID)
 
