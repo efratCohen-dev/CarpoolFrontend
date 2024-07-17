@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 
 const useDelete = (url: string) => {
 
-    const axiosDataDelete = async (id:ObjectId) => {
+    const axiosDataDelete = async (id:string) => {
         try {
             const deleteT = await axios.delete(`${url}/${id}`)
         } catch {
