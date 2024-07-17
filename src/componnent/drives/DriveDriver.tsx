@@ -13,12 +13,12 @@ interface Props {
 }
 const DriveDriver:React.FC<Props> = ({drive})=>{
     useEffect(() => {
-        drive.driver && GetById(drive.driver)
+        drive.driver && GetById(`${drive.driver}`)
     });
     const [drivers, setDrivers] = useState<IDriver[]>([])
     const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVERURL);
 
-    const GetById = async (id: ObjectId) => {
+    const GetById = async (id: String) => {
         await axiosDataGetById(id);
         getAllDrivers(resGetById)
         setDrivers(resGetById)

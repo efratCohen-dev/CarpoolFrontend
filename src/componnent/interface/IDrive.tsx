@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 export interface IDrive {
     id?: ObjectId,
-    driver:ObjectId,
+    driver:String,
     // id:string,
     // driver:string,
     leavingTime:Date,
@@ -17,6 +17,6 @@ export interface IDrive {
         numBuild:Number
     },
     price: Number,
-    places: Number,
+    places: number,
     passengers:Object[]
 };

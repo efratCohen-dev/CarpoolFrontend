@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import InputLogin from '../storybook/InputLogin';
 import { useDispatch } from 'react-redux';
 import useCreate from '../../hooks/Create';
@@ -13,14 +12,15 @@ import { createDriver } from '../../store/Driver';
 import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
 import { IInput } from '../interface/IInput';
-import { List } from '@mui/material';
+import { createTheme, List } from '@mui/material';
 import GeneralCreate from '../../hooks/GeneralCreate';
 import { ObjectId } from 'mongodb';
+import DefaultDetails from './DefaultDetails';
 const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
-  login: String;
+  login: string;
   driveID?: string;
   handleClose: () => void;
 
@@ -34,7 +34,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
   const [sign, setSign] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const data = new FormData(event.currentTarget);    
     // if (driveID){
       AxiosDataGeneralCreate(login, data, driveID)
 
@@ -49,9 +49,8 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
   }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        <CssBaseline/>
         <Box
           sx={{
             marginTop: 8,
@@ -61,9 +60,10 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
           }}
         >
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <DefaultDetails type={login}/>
             <Grid container spacing={2}>
               {FormProps.map((input) => (
-                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern}/>
               ))
               }
 
@@ -80,7 +80,6 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
 export default SignIn

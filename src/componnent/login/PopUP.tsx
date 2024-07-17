@@ -10,12 +10,13 @@ import useCreate from '../../hooks/Create';
 import { SubmitHandler, Controller } from "react-hook-form";
 import SignIn from './signIn';
 import { IInput } from '../interface/IInput';
-import AddDriver from '../storybook/addDrive';
 import * as iconsMaterial from '@mui/icons-material';
+import { BackgroundTitle, PopUpConteiner } from './popUp.styled';
+import theme from '../../Theme';
 import { ObjectId } from 'mongodb';
 interface Props {
     FormProps: IInput[];
-    title: String[];
+    title: string[];
     driveID?: string;
     Add: iconsMaterial.SvgIconComponent;
 }
@@ -65,30 +66,25 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID }) => {
                     <Add />
                 </Fab>
             </Button>
-
-            <Dialog
-                fullWidth={fullWidth}
-                open={open}
-                onClose={handleClose}
-            >
-                <DialogTitle> {title[0]}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {title[1]}
-                    </DialogContentText>
-                    {/* <ChildComponent onClick={handleClose} /> */}
-                    {/* setTitle={setTitle} */}
-                    {/* <Join onClick={handleClose}/> */}
-                    {/* {
-                        driveId ?
-                            <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} driveId={driveId || null} />
-                            : <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} />
-
-                    } */}
-                    <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} driveID={driveID} />
-
-                </DialogContent>
-            </Dialog>
+                <Dialog
+                    fullWidth={fullWidth}
+                    open={open}
+                    onClose={handleClose}
+                    dir={theme.direction}
+                >
+                    <BackgroundTitle color={theme.palette.primary.main}>
+                        <DialogTitle> {title[0]}</DialogTitle>
+                    </BackgroundTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {title[1]}
+                        </DialogContentText>
+                        {/* <ChildComponent onClick={handleClose} /> */}
+                        {/* setTitle={setTitle} */}
+                        {/* <Join onClick={handleClose}/> */}
+                        <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} />
+                    </DialogContent>
+                </Dialog>
         </React.Fragment>
     );
 };

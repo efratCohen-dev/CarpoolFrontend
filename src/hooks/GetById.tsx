@@ -5,7 +5,7 @@ import { ObjectId } from 'mongodb';
 const useGetById = (url: string) => {
 
     const [resGetById, setRes] = useState([])
-    const axiosDataGetById = async (id:ObjectId) => {
+    const axiosDataGetById = async (id:String) => {
         try {            
             const get = await axios.get(`${url}/${id}`)
             setRes(get.data)
