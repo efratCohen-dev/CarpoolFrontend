@@ -1,22 +1,22 @@
 import { ObjectId } from 'mongodb';
 export interface IDrive {
-    // id: ObjectId,
-    // driver:ObjectId,
-    id:string,
-    driver:string,
-    // leavingTime:Date,
-    leavingTime:Number,
-    startingPoint:{
-        city:String,
-        street:String,
-        numBuild:Number
+    id?: ObjectId,
+    driver: ObjectId,
+    // id:string,
+    // driver:string,
+    leavingTime: Date,
+    // leavingTime:Number,
+    startingPoint: {
+        city: String,
+        street: String,
+        numBuild: Number
     },
-    destination:{
-        city:String,
-        street:String,
-        numBuild:Number
+    target: {
+        city: String,
+        street: String,
+        numBuild: Number
     },
     price: Number,
-    availablePlaces: Number,
-    passengers:String[]
+    places: number,
+    passengers: Object[]
 };

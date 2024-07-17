@@ -1,10 +1,12 @@
 import axios from 'axios';
 import Cookies from "cookies-ts"
 import { IDriver } from '../componnent/interface/IDriver'
+import { IDrive } from '../componnent/interface/IDrive';
+import { IMassage } from '../componnent/interface/IMassage';
 
 const useCreate = (url: string) => {
 
-    const axiosDataCreate = async (newData: IDriver) => {
+    const axiosDataCreate = async (newData: IDriver | IDrive | IMassage) => {
         try {
             const cookies = new Cookies();
             console.log("url", url);

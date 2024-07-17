@@ -40,6 +40,15 @@
   width: 60%;
 
 }
+.icon{
+  color: black;
+  /* font-size: 50px; */
+  /* width: 50px;
+  height: 50px; */
+}
+.margin{
+  margin-left: 100px;
+}
 
 @keyframes App-logo-spin {
   from {

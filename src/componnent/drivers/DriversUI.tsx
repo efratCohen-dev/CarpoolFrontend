@@ -1,56 +1,68 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { HTTP } from "../../HTTPpage.contents";
 import useGet from "../../hooks/Get";
-import { getAll } from "../../store/Driver";
-import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
-import React, { Suspense, useEffect, useState } from "react";
+import { getAllDrivers } from "../../store/Driver";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from "@mui/material";
+import React, { Fragment, Suspense, useEffect, useState } from "react";
 import { AppDispatch, RootState } from "../../Store";
-import EastIcon from '@mui/icons-material/East';
-import { Route } from "@mui/icons-material";
-// import MyDrives from "../drives/MyDrives";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { ObjectId } from 'mongodb';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 import '../../App.css'
-import MyDrives from "../drives/MyDrives";
+import MyDrives from '../drives/MyDrives'
+import { IDriver } from "../interface/IDriver";
+import { ClassNames } from "@emotion/react";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
 const DriversUI = () => {
-    useEffect(() => {
-        axiosData();
-        dispatch(getAll({ res: res }));
-    });
+
+    const [currentDrivers, setCurrentDrivers] = useState<IDriver[]>([]);
+    const [UI, setUI] = useState<IDriver[]>([]);
+    const drivers = useAppSelector((driver) => driver.DriverSlice.drivers);
     const { res, axiosData } = useGet(HTTP.DRIVERURL);
     const dispatch = useDispatch();
+    const [expanded, setExpanded] = useState<string | false>('panel1');
+    const [isExsit, setIsExsit] = useState(false);
 
-    const drivers = useAppSelector((driver) => driver.DriverSlice.drivers);
+    useEffect(() => {
+        axiosData();
+        dispatch(getAllDrivers({ res: res }));
+    });
+    useEffect(() => {
+        if (isExsit) {
+            setUI(currentDrivers)
+        }
+        else {
+            setUI(drivers)
+        }
+    }, [isExsit, drivers]);
 
-    console.log("drivers", drivers);
 
-    // const handleOnclick = ({id: ObjectId}) => {
-    //     return (
-    //         <MyDrives />
-
-    //     )
-    // }
-
-    // const [profil, setProfil] = useState('')
-    const rrr = ['333333', '5555555', '88888888888']
-    let profil = '';
-    const [expanded, setExpanded] = React.useState<string | false>('panel1');
     const handleChange =
         (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
             setExpanded(newExpanded ? panel : false);
         };
+    const filter = (f: string) => {
+        setIsExsit(true);
+        setCurrentDrivers(drivers.filter(driver => driver.name?.includes(f)))
+    }
 
     return (
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {
-                drivers.map((d) => {
+        <>
+            <TextField
+                hiddenLabel
+                id="filled-hidden-label-small"
+                // label={`חיפוש ${<PersonSearchIcon className="icon"/>}`}
+                label='חיפוש'
+                variant="filled"
+                size="small"
+                onChange={(e) => filter(e.target.value)}
+            />
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {UI.map((d) => {
                     return (
                         <>
                             <Accordion onChange={handleChange('panel1')}>
@@ -62,14 +74,14 @@ const DriversUI = () => {
                                 >
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
-                                            <Avatar alt="Cindy Baker" />
+                                            <Avatar alt="Cindy Baker">{d.name.slice(0, 1)}</Avatar>
                                         </ListItemAvatar>
                                         <div className="allDrivers">
                                             <ListItemText
 
                                                 primary={d.name}
                                                 secondary={
-                                                    <React.Fragment>
+                                                    <Fragment>
                                                         <Typography
                                                             sx={{ display: 'inline' }}
                                                             component="span"
@@ -90,15 +102,14 @@ const DriversUI = () => {
                                                         </Typography>
                                                         {d.phone}
 
-                                                    </React.Fragment>
+                                                    </Fragment>
                                                 }
                                             />
                                         </div>
                                     </ListItem >
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    {/* <Divider variant="inset" component="li" /> */}
-                                    <MyDrives />
+                                    <MyDrives driver={d} />
                                 </AccordionDetails>
                                 <Divider variant="inset" component="li" />
                             </Accordion>
@@ -106,8 +117,9 @@ const DriversUI = () => {
                         </>
                     )
                 })
-            }
-        </List >
+                }
+            </List >
+        </>
     )
 }
 export default DriversUI

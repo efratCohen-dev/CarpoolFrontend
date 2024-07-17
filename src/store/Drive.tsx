@@ -4,21 +4,8 @@ import { RootState } from '../Store';
 
 const initValue: { drives: IDrive[] }  =  {
     drives:[
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        // {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] },
-        {id: "string", driver: "string", leavingTime: 6, startingPoint: { city: 'string', street: 'string', numBuild: 6 }, destination: { city: 'string', street: 'string', numBuild: 8 }, price: 6, availablePlaces: 4, passengers: ['ttt'] }
+        // {id: "string", driver: "string", leavingTime:  new Date(), startingPoint: { city: 'בני ברק', street: 'הרב שך', numBuild: 16 }, destination: { city: 'מודעין עילית', street: 'מרומי שדה', numBuild: 20 }, price: 6, places: 4, passengers: ['אפרת','רבקי'] },
+        // {id: "string", driver: "string", leavingTime:  new Date(), startingPoint: { city: 'בית שמש', street: 'ריש לקיש', numBuild: 6 }, destination: { city: 'טלזטון', street: 'רימונים', numBuild: 4 }, price: 6, places: 4, passengers: ['אלישבע'] }
     ]
 };
 
@@ -45,13 +32,13 @@ const DriveSlice = createSlice({
                         street: action.payload.newStartingPoint.street,
                         numBuild: action.payload.newStartingPoint.numBuild
                     };
-                    drive.destination = {
+                    drive.target = {
                         city: action.payload.newDestination.city,
                         street: action.payload.newDestination.street,
                         numBuild: action.payload.newDestination.numBuild
                     }
                     drive.price = action.payload.newPrice;
-                    drive.availablePlaces = action.payload.newAvailablePlaces;
+                    drive.places = action.payload.newPlaces;
                     drive.passengers = action.payload.newPassengers;
                 }
                 return drive;

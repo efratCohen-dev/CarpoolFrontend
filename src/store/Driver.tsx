@@ -9,7 +9,7 @@ const DriverSlice = createSlice({
     name: "driver",
     initialState: initValue,
     reducers: {
-        getAll: (state, action) => {
+        getAllDrivers: (state, action) => {
             state.drivers = action.payload.res;
         },
         createDriver: (state, action) => {
@@ -33,5 +33,5 @@ const DriverSlice = createSlice({
     }
 });
 
-export const { createDriver, deleteDriver, updateDriver, getAll } = DriverSlice.actions;
+export const { createDriver, deleteDriver, updateDriver, getAllDrivers } = DriverSlice.actions;
 export default DriverSlice.reducer;

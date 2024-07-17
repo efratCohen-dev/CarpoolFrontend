@@ -10,6 +10,9 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import { useToast } from "@chakra-ui/react";
 import './ChatStyle.scss';
 import { UsersContext } from '../context/UsersContext';
+import { HTTP } from '../../../HTTPpage.contents';
+import useGet from '../../../hooks/Get';
+import GeneralCreate from '../../../hooks/GeneralCreate';
 
 // interface Props {
 //     name: String;
@@ -21,11 +24,20 @@ const Chat = () => {
     const { name, room, setName, setRoom } = useContext(MainContext);
     const socket = useContext(SocketContext);
     const [message, setMessage] = useState('');
+    const { res, axiosData } = useGet(HTTP.MASSAGEEURL);
+    const { AxiosDataGeneralCreate } = GeneralCreate();
+
     const [messages, setMessages] = useState<any[]>([]);
+    setMessages(res);
     const history = { push: String, go: Number };
     const { users } = useContext(UsersContext);
 
     const toast = useToast();
+
+    useEffect(() => {
+        axiosData();
+    },[])
+
     useEffect(() => {
         console.log("socket", socket);
     }, [socket])
@@ -68,7 +80,12 @@ const Chat = () => {
             //     console.log('client new')
             // )
 
-            socket.emit('sendMessage', message, () => setMessage(''));
+            socket.emit('sendMessage', message, () => {
+                setMessage('')
+            }
+            );
+            AxiosDataGeneralCreate('צאט', message)
+
             setMessage('');
         }
 
@@ -78,9 +95,6 @@ const Chat = () => {
 
 
     };
-
-
-
 
     const logout = () => {
         // setName(''); 
