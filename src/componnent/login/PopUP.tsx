@@ -14,13 +14,15 @@ import AddDriver from '../storybook/addDrive';
 import * as iconsMaterial from '@mui/icons-material';
 import { BackgroundTitle, PopUpConteiner } from './popUp.styled';
 import theme from '../../Theme';
+import { ObjectId } from 'mongodb';
 interface Props {
     FormProps: IInput[];
     title: String[];
+    driveID?: string;
     Add: iconsMaterial.SvgIconComponent;
 }
 
-const PopUP: React.FC<Props> = ({ FormProps, title, Add }) => {
+const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID }) => {
 
     const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);

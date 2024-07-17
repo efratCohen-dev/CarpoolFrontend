@@ -12,39 +12,35 @@ import { createDriver } from '../../store/Driver';
 import { AppDispatch } from '../../Store';
 import { IDriver } from '../interface/IDriver';
 import { IInput } from '../interface/IInput';
-import { List } from '@mui/material';
+import { createTheme, List } from '@mui/material';
+import GeneralCreate from '../../hooks/GeneralCreate';
+import { ObjectId } from 'mongodb';
+import DefaultDetails from './DefaultDetails';
+const defaultTheme = createTheme();
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
-  login:String;
+  login: String;
+  driveID?: string;
   handleClose: () => void;
+
 };
 
-const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
-  console.log("FormProps", FormProps);
-  console.log("login",login);
-  
+const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => {
 
   const dispatch = useDispatch();
   const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
+  const { AxiosDataGeneralCreate } = GeneralCreate();
   const [sign, setSign] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const newDriver: IDriver = {
-      name: data.get('userName')?.toString() || '',
-      password: data.get('password')?.toString() || '',
-      email: data.get('email')?.toString() || '',
-      phone: parseInt(data.get('tel')?.toString() || '0', 10)
-    };
-    try {
-      console.log("newDriver", newDriver);
+    // if (driveID){
+      AxiosDataGeneralCreate(login, data, driveID)
 
-      await axiosDataCreate(newDriver);
-      dispatch(createDriver({ newDriver }));
-    } catch (error) {
-      console.error('Error creating driver:', error);
-    }
+    // }else{
+      // AxiosDataGeneralCreate(login, data);
+    // }
     handleClose();
   };
   const signChange = () => {
@@ -54,7 +50,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
 
   return (
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        <CssBaseline/>
         <Box
           sx={{
             marginTop: 8,
@@ -64,12 +60,13 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login }) => {
           }}
         >
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <DefaultDetails type={login}/>
             <Grid container spacing={2}>
               {FormProps.map((input) => (
                 <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern}/>
               ))
               }
-            
+
             </Grid>
             <Button
               type="submit"
