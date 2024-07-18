@@ -15,7 +15,7 @@ const AllDrives = () => {
         axiosData();
         dispatch(getAll({ res: res }));
     });
-    const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVEURL);
+    // const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVEURL);
     const { res, axiosData } = useGet(HTTP.DRIVEURL);
     const dispatch = useDispatch();
     const drives = useAppSelector((state) => state.DriveSlice.drives);

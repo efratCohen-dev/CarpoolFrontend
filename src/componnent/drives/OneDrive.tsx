@@ -67,14 +67,14 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                         <Avatar key={index} sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{p.name[0]}</Avatar>
                                     )
                                 }
-                                {drive.id &&
+                                {/* {drive.id && */}
 
-                                    // <><h1>vhh {drive.places - drive.passengers.length > 0}</h1>
-                                    <Join driveID={`${drive.id}`} />
-                                    // </>
+                                    {/* // <><h1>vhh {drive.places - drive.passengers.length > 0}</h1> */}
+                                        <Join driveID={`${drive.id}`} />
+                                    {/* // </> */}
 
 
-                                }
+                                {/* } */}
 
                                 {/* <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar> */}
                             </Flex>

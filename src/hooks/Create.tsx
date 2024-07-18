@@ -8,11 +8,11 @@ const useCreate = (url: string) => {
     const axiosDataCreate = async (newData: IDriver | IDrive) => {
         try {
             const cookies = new Cookies();
-            const post = await axios.post(url, newData);
-            if(url.substring(url.length-1,url.length) =='r'){
+            if (url.substring(url.length - 1, url.length) != 'r') {
+                const post = await axios.post(url, { data: newData, token: cookies.get('token') });
+            } else {
+                const post = await axios.post(url, newData);
                 cookies.set("token", post.data.token);
-            }else{
-                cookies.get("token");
             }
 
         } catch (error) {
