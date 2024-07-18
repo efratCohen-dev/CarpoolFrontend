@@ -13,9 +13,13 @@ import { FlexColumn, Flex, FlexBetween } from './Drive.styled';
 import Avatar from '@mui/material/Avatar';
 import theme from '../../Theme';
 import { IDriver } from "../interface/IDriver";
-import Join from "../login/join";
-import { ObjectIdLike } from "bson";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { ObjectId } from "mongodb";
+import useDelete from "../../hooks/Delete";
+import { HTTP } from "../../HTTPpage.contents";
+import Join from "../login/join";
+import { Button, IconButton } from "@mui/material";
 // export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
@@ -26,6 +30,26 @@ interface Props {
 
 
 const OneDrive: React.FC<Props> = ({ drive, driver }) => {
+
+    const addPassenger = (d: IDrive) => {
+        d.passengers = [...d.passengers, "new"]
+    }
+
+    const { axiosDataDelete } = useDelete(HTTP.DRIVEURL)
+
+    const deleteDrive = (id: string) => {
+        axiosDataDelete(id);
+        deleteDrive(id);
+        console.log("deleteDrive", id);
+
+    };
+    const editDrive = (id: string) => {
+        //יפתח חלונית נסיעה עם הפרטים כברירת מחדל ואפשר עריכה.
+        // נצטרך שבקובץ יצירה נאפשר גם עריכה
+        console.log("editDrive", id);
+
+    };
+
 
     return (
         <>
@@ -92,6 +116,16 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                 />
             </ListItem>
             <Divider variant="inset" component="li" />
+            {/* {drive.id && */}
+                {/* <> */}
+                    <IconButton aria-label="delete" color="primary">
+                        <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
+                    </IconButton >
+                    <IconButton aria-label="delete" color="primary">
+                        <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
+                    </IconButton>
+                {/* </> */}
+            {/* } */}
         </>
     )
 }
