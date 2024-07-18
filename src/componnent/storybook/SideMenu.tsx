@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -26,7 +26,7 @@ const drawerWidth = 100;
 
 
 const SideMenu = () => {
-    const theme = useTheme();
+    // const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [allDrivers, setAllDrivers] = useState(false);
     // const [addDrive, setAddDrive] = useState(false);
@@ -54,31 +54,32 @@ const SideMenu = () => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         boxSizing: 'border-box',
-                    },
+                    }
                 }}
                 variant="permanent"
                 anchor="right"
             >
-                {/* <AirportShuttleIcon
+                <Box sx={{ bgcolor: 'secondary.main' ,height:"100vh",color:'primary.main'}}>
+
+                    {/* <AirportShuttleIcon
                     className="icon" 
                     onClick={setAllDrivers(!allDrivers)}>
 
                 </AirportShuttleIcon> */}
-                <GroupIcon className="icon"
-                    // color="inherit"
-                    // aria-label="open drawer"
-                    onClick={handleDrivers}
-                // edge="start"
-                // sx={{ mr: 2}}
-                />
-                <AddDriver/>
-                <CreatDrive/>
-
+                    <GroupIcon className="icon"
+                        // color="inherit"
+                        // aria-label="open drawer"
+                        onClick={handleDrivers}
+                    // edge="start"
+                    sx={{color:'primary.main' }}
+                    />
+                    <AddDriver />
+                    <CreatDrive />
+                </Box>
             </Drawer>
             {
                 allDrivers && <DriversUI />
             }
-
         </div >
     );
 };
