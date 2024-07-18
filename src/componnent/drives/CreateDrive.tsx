@@ -6,8 +6,12 @@ const CreatDrive = () => {
     const inputs: IInput[] = [
         { placeorder: 'עלות הנסיעה', nameInput: 'priceOfDrive', typ: 'number'},
         { placeorder: 'מס מקמות ברכב', nameInput: 'numPlacesOfDrive', typ: 'number'},
-        { placeorder: 'נקודת מוצא', nameInput: 'startingPoint', typ: 'text'},
-        { placeorder: 'נקודת יעד', nameInput: 'destinationPoint', typ: 'text'},
+        { placeorder: 'עיר מוצא', nameInput: 'startingPointCity', typ: 'text'},
+        { placeorder: 'רחוב מוצא', nameInput: 'startingPointStreet', typ: 'text'},
+        { placeorder: 'מספר ביניין מוצא', nameInput: 'startingPointNum', typ: 'text'},
+        { placeorder: 'עיר יעד', nameInput: 'destinationPointCity', typ: 'text'},
+        { placeorder: 'רחוב יעד', nameInput: 'destinationPointStreet', typ: 'text'},
+        { placeorder: 'מספר ביניין יעד', nameInput: 'destinationPointNum', typ: 'text'},
         { placeorder: 'יציאה משוערת', nameInput: 'time', typ: 'time'},
     ]
 

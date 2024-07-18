@@ -14,6 +14,7 @@ import { AppDispatch, RootState } from "../Store";
 import useGet from "./Get";
 import useGetByNamePassword from "./GetByNamePassword";
 import { useEffect } from "react";
+import CreatDrive from "../componnent/drives/CreateDrive";
 
 // interface Props {
 //     type: String;
@@ -45,6 +46,7 @@ const GeneralCreate = () => {
                     } catch (error) {
                         console.error('Error creating driver:', error);
                     }
+                  
 
                     break;
                 }
@@ -90,8 +92,16 @@ const GeneralCreate = () => {
                         driver: '6697d5eade0f9eaefaa58c2e',
                         // driver: res[0].id |  '',
                         leavingTime: object.get('leavingTime')?.toString() || '',
-                        startingPoint: object.get('startingPoint')?.toString() || '',
-                        target: object.get('target')?.toString() || '',
+                        startingPoint: {
+                            city: object.get('startingPointCity')?.toString() || '',
+                            street: object.get('startingPointStreet')?.toString() || '',
+                            numBuild: object.get('startingPointNum')?.toString() || '',
+                        }, 
+                        target: {
+                            city: object.get('targetPointCity')?.toString() || '',
+                            street: object.get('targetPointStreet')?.toString() || '',
+                            numBuild: object.get('targetPointNum')?.toString() || '',
+                        }, 
                         price: parseInt(object.get('price')?.toString() || '15', 10),
                         places: parseInt(object.get('places')?.toString() || '4', 10),
                         passengers: []
