@@ -17,6 +17,7 @@ import DriversUI from '../drivers/DriversUI';
 import { Icon } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import '../../App.css'
+import CreatDrive from '../drives/CreateDrive';
 
 const drawerWidth = 100;
 
@@ -25,6 +26,7 @@ const SideMenu = () => {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [allDrivers, setAllDrivers] = useState(false);
+    // const [addDrive, setAddDrive] = useState(false);
 
     const handleDrawer = () => {
         console.log("Icon");
@@ -33,6 +35,9 @@ const SideMenu = () => {
     const handleDrivers = () => {
         setAllDrivers(!allDrivers);
     }
+    // const handleNewDrive = () => {
+    //     setAddDrive(!addDrive);
+    // }
 
     const ArrIcon = [ExtensionIcon, LocalShippingIcon, AirportShuttleIcon]
 
@@ -63,6 +68,7 @@ const SideMenu = () => {
                 // edge="start"
                 // sx={{ mr: 2}}
                 />
+                <CreatDrive/>
 
             </Drawer>
             {

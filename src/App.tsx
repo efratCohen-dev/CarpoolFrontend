@@ -29,7 +29,7 @@ function App() {
       <ThemeProvider theme={theme}>
         {/* <DriversUI /> */}
         {/* <Search /> */}
-        <AllDrives />
+        {/* <AllDrives /> */}
         {/* <Join /> */}
         {/* <AddDriver/> */}
         {/* <CreatDrive /> */}

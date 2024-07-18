@@ -1,5 +1,5 @@
 import { IDrive } from "../interface/IDrive";
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../Store';
 import ListItem from '@mui/material/ListItem';
@@ -40,7 +40,6 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
     const deleteDrive = (id: string) => {
         axiosDataDelete(id);
         deleteDrive(id);
-        console.log("deleteDrive", id);
 
     };
     const editDrive = (id: string) => {
@@ -69,19 +68,17 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                 }
                                 {/* {drive.id && */}
 
-                                    {/* // <><h1>vhh {drive.places - drive.passengers.length > 0}</h1> */}
-                                        <Join driveID={`${drive.id}`} />
-                                    {/* // </> */}
+                                {/* // <><h1>vhh { drive.passengers.length <drive.places}</h1> */}
+                                <Join driveID={`${drive.id}`} />
 
 
-                                {/* } */}
 
                                 {/* <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar> */}
                             </Flex>
                         </FlexBetween>
                     }
                     secondary={
-                        <React.Fragment>
+                        <Fragment>
                             <Typography
                                 sx={{ display: 'inline' }}
                                 component="span"
@@ -111,21 +108,17 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                     <div>{`עלות הנסיעה: ${drive.price} ש"ח`}</div>
                                 </FlexColumn>
                             </Flex>
-                        </React.Fragment>
+                        </Fragment>
                     }
                 />
             </ListItem>
+            <IconButton aria-label="delete" color="primary">
+                <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
+            </IconButton >
+            <IconButton aria-label="delete" color="primary">
+                <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
+            </IconButton>
             <Divider variant="inset" component="li" />
-            {/* {drive.id && */}
-                {/* <> */}
-                    <IconButton aria-label="delete" color="primary">
-                        <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
-                    </IconButton >
-                    <IconButton aria-label="delete" color="primary">
-                        <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
-                    </IconButton>
-                {/* </> */}
-            {/* } */}
         </>
     )
 }

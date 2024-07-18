@@ -13,7 +13,7 @@ const InputLogin: React.FC<IInput> = ({ placeorder, nameInput, typ, regexPattern
         try {
             patternRegExp = new RegExp(regexPattern);
         } catch (error) {
-            console.error(`Invalid regex pattern: ${placeorder}`, error);
+            // console.error(`Invalid regex pattern: ${placeorder}`, error);
         }
     }
 

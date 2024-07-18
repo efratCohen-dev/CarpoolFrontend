@@ -11,14 +11,13 @@ export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 const AllDrives = () => {
+    const drives = useAppSelector((state) => state.DriveSlice.drives);
     useEffect(() => {
         axiosData();
         dispatch(getAll({ res: res }));
-    });
-    // const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVEURL);
+    },[drives]);
     const { res, axiosData } = useGet(HTTP.DRIVEURL);
     const dispatch = useDispatch();
-    const drives = useAppSelector((state) => state.DriveSlice.drives);
 
     return (
         <>
