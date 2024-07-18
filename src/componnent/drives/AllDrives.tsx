@@ -15,7 +15,7 @@ const AllDrives = () => {
     useEffect(() => {
         axiosData();
         dispatch(getAll({ res: res }));
-    },[drives]);
+    });
     const { res, axiosData } = useGet(HTTP.DRIVEURL);
     const dispatch = useDispatch();
 

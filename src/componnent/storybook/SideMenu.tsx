@@ -16,8 +16,11 @@ import * as iconsMaterial from '@mui/icons-material';
 import DriversUI from '../drivers/DriversUI';
 import { Icon } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
+import LoginIcon from '@mui/icons-material/Login';
+
 import '../../App.css'
 import CreatDrive from '../drives/CreateDrive';
+import AddDriver from '../drivers/AddDiver';
 
 const drawerWidth = 100;
 
@@ -68,6 +71,7 @@ const SideMenu = () => {
                 // edge="start"
                 // sx={{ mr: 2}}
                 />
+                <AddDriver/>
                 <CreatDrive/>
 
             </Drawer>

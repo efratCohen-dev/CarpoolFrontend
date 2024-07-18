@@ -1,6 +1,6 @@
 import { IInput } from "../interface/IInput"
 import PopUP from "../login/PopUP"
-import AddIcon from '@mui/icons-material/Add';
+import LoginIcon from '@mui/icons-material/Login';
 
 const AddDriver = () => {
     const inputs: IInput[] = [
@@ -10,7 +10,7 @@ const AddDriver = () => {
         { placeorder: 'נייד', nameInput: 'tel', typ: 'text', regexPattern: '^[0]{1}[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$' }
     ]
     return (
-        <PopUP title={['כניסה כנהג', 'להתחברות הכנס שם משתמש וסיסמה']} FormProps={inputs} Add={AddIcon} />
+        <PopUP title={['כניסה כנהג', 'להתחברות הכנס שם משתמש וסיסמה']} FormProps={inputs} Add={LoginIcon} />
     )
 };
 export default AddDriver

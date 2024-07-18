@@ -64,7 +64,7 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID }) => {
         <React.Fragment>
             <Button onClick={handleClickOpen}>
                 <Fab>
-                    <Add />
+                    <Add/>
                 </Fab>
             </Button>
             <Dialog

@@ -1,4 +1,5 @@
 import Drawer from '@mui/material/Drawer';
+import InputLogin from '../storybook/InputLogin';
 
 const drawerWidth = 240;
 
@@ -18,6 +19,8 @@ const Search = () => {
         variant="permanent"
         anchor="right"
       >
+        <InputLogin placeorder={'קודת יעד'} nameInput={'searchStart'} typ={'text'} />
+        <InputLogin placeorder={'קודת יעד'} nameInput={'searchStart'} typ={'text'}/>
       </Drawer>
     </div>
   )

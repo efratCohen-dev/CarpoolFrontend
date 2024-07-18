@@ -29,12 +29,8 @@ function App() {
       <ThemeProvider theme={theme}>
         {/* <DriversUI /> */}
         {/* <Search /> */}
-        {/* <AllDrives /> */}
-        {/* <Join /> */}
-        {/* <AddDriver/> */}
-        {/* <CreatDrive /> */}
+        <AllDrives />
         <SideMenu/>
-        {/* <IconMenu Icon={LocalShippingIcon}/> */}
       </ThemeProvider>
     </CacheProvider >
   );
