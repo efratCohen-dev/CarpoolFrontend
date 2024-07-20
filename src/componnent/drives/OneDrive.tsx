@@ -1,7 +1,7 @@
 import { IDrive } from "../interface/IDrive";
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../Store';
+import { AppDispatch, RootState } from '../../Store';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
@@ -20,7 +20,8 @@ import useDelete from "../../hooks/Delete";
 import { HTTP } from "../../HTTPpage.contents";
 import Join from "../login/join";
 import { Button, IconButton } from "@mui/material";
-// export const useAppDispatch = () => useDispatch<AppDispatch>()
+import { deleteDrive } from "../../store/Drive";
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface Props {
@@ -31,18 +32,15 @@ interface Props {
 
 const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
-    const addPassenger = (d: IDrive) => {
-        d.passengers = [...d.passengers, "new"]
-    }
+    const { axiosDataDelete } = useDelete(HTTP.DRIVEURL);
+    const dispatch = useDispatch();
 
-    const { axiosDataDelete } = useDelete(HTTP.DRIVEURL)
-
-    const deleteDrive = (id: string) => {
+    const deleteCurrentDrive = (id: string) => {
         axiosDataDelete(id);
-        deleteDrive(id);
-        console.log("deleteDrive", id);
-
+        dispatch(deleteDrive({id:id}));
+        
     };
+
     const editDrive = (id: string) => {
         //יפתח חלונית נסיעה עם הפרטים כברירת מחדל ואפשר עריכה.
         // נצטרך שבקובץ יצירה נאפשר גם עריכה
@@ -69,19 +67,17 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                 }
                                 {/* {drive.id && */}
 
-                                    {/* // <><h1>vhh {drive.places - drive.passengers.length > 0}</h1> */}
-                                        <Join driveID={`${drive.id}`} />
-                                    {/* // </> */}
+                                {/* // <><h1>vhh { drive.passengers.length <drive.places}</h1> */}
+                                <Join driveID={`${drive.id}`} />
 
 
-                                {/* } */}
 
                                 {/* <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar> */}
                             </Flex>
                         </FlexBetween>
                     }
                     secondary={
-                        <React.Fragment>
+                        <Fragment>
                             <Typography
                                 sx={{ display: 'inline' }}
                                 component="span"
@@ -111,21 +107,17 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                     <div>{`עלות הנסיעה: ${drive.price} ש"ח`}</div>
                                 </FlexColumn>
                             </Flex>
-                        </React.Fragment>
+                        </Fragment>
                     }
                 />
             </ListItem>
+            <IconButton aria-label="delete" color="primary">
+                <DeleteIcon fontSize="inherit" onClick={() => deleteCurrentDrive(`${drive.id}`)} />
+            </IconButton >
+            <IconButton aria-label="delete" color="primary">
+                <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
+            </IconButton>
             <Divider variant="inset" component="li" />
-            {/* {drive.id && */}
-                {/* <> */}
-                    <IconButton aria-label="delete" color="primary">
-                        <DeleteIcon fontSize="inherit" onClick={() => deleteDrive(`${drive.id}`)} />
-                    </IconButton >
-                    <IconButton aria-label="delete" color="primary">
-                        <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
-                    </IconButton>
-                {/* </> */}
-            {/* } */}
         </>
     )
 }

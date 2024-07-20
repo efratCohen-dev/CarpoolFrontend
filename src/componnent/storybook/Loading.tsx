@@ -10,7 +10,9 @@ const Loading = (props: CircularProgressProps)=>{
             variant="indeterminate"
             disableShrink
             sx={{
-                color: (theme) => (theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8'),
+                color: (theme) => {
+                    return (theme.palette.primary.main === 'light' ? '#979797': '#3c3c3c');
+                },
                 animationDuration: '550ms',
                 position: 'absolute',
                 left: 0,

@@ -30,11 +30,7 @@ function App() {
         {/* <DriversUI /> */}
         {/* <Search /> */}
         <AllDrives />
-        {/* <Join /> */}
-        {/* <AddDriver/> */}
-        {/* <CreatDrive /> */}
         <SideMenu/>
-        {/* <IconMenu Icon={LocalShippingIcon}/> */}
       </ThemeProvider>
     </CacheProvider >
   );
