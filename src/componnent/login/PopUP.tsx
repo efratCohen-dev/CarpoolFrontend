@@ -15,14 +15,16 @@ import { BackgroundTitle, PopUpConteiner } from './popUp.styled';
 import theme from '../../Theme';
 import { ObjectId } from 'mongodb';
 import CreatDrive from '../drives/CreateDrive';
+import { BorderLeft } from '../../styled/style.styled';
 interface Props {
     FormProps: IInput[];
     title: string[];
     driveID?: string;
+    text?: String
     Add: iconsMaterial.SvgIconComponent;
 }
 
-const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID }) => {
+const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
 
     const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
@@ -63,9 +65,16 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID }) => {
     return (
         <React.Fragment>
             <Button onClick={handleClickOpen}>
-                <Fab>
-                    <Add/>
-                </Fab>
+                {text ? <BorderLeft color={theme.palette.primary.main}>
+                    <Add className="icon" sx={{color:'white'}}/>
+                    <div>{text}</div>
+                </BorderLeft>
+                : <Fab>
+                <Add/>
+            </Fab>
+
+            }
+
             </Button>
             <Dialog
                 fullWidth={fullWidth}
@@ -86,7 +95,7 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID }) => {
                     <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} driveID={driveID} />
                 </DialogContent>
             </Dialog>
-            
+
         </React.Fragment>
 
     );

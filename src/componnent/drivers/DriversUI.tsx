@@ -29,8 +29,10 @@ const DriversUI = () => {
 
     useEffect(() => {
         axiosData();
+    },[]);
+    useEffect(()=>{
         dispatch(getAllDrivers({ res: res }));
-    });
+    },[res])
     useEffect(() => {
         if (isExsit) {
             setUI(currentDrivers)

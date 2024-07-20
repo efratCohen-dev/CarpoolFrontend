@@ -24,11 +24,40 @@ export const useAppDispatch = (type: string) => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 const GeneralCreate = () => {
     const dispatch = useDispatch();
+
+    // const foo = (currentDriver: IDriver) => {
+    //     // const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.currentDriver);
+    //     try {
+    //         const { res, axiosGetByNamePassword } = useGetByNamePassword(HTTP.DRIVEURL + '/namePassword')
+    //         axiosGetByNamePassword({ name: currentDriver.name, password: currentDriver.password });
+    //         console.log('res currentDriver', res);
+
+    //         dispatch(getCurrentDriver({ res: res }));
+    //     } catch (error) {
+    //         console.error('Error join passenger:', error);
+    //     }
+    // };
+
     const AxiosDataGeneralCreate = async (type: String, object: any, ID?: string) => {
 
         switch (type) {
             case 'כניסה כנהג':
                 {
+                    const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.currentDriver);
+                    console.log('currentDriver', currentDriver);
+
+                    // useEffect(() => {
+                    //     // foo(newDriver);
+                    //     try {
+                    //         const { res, axiosGetByNamePassword } = useGetByNamePassword(HTTP.DRIVEURL + '/namePassword')
+                    //         axiosGetByNamePassword({ name: currentDriver.name, password: currentDriver.password });
+                    //         console.log('res currentDriver', res);
+
+                    //         dispatch(getCurrentDriver({ res: res }));
+                    //     } catch (error) {
+                    //         console.error('Error join passenger:', error);
+                    //     }
+                    // }, [currentDriver])
                     const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
 
                     const newDriver: IDriver = {
@@ -38,16 +67,14 @@ const GeneralCreate = () => {
                         phone: parseInt(object.get('tel')?.toString() || '0', 10)
                     };
                     try {
-                        console.log("newDriver", newDriver);
+                        axiosDataCreate(newDriver);
 
-                        await axiosDataCreate(newDriver);
+
                         dispatch(getCurrentDriver({ res: newDriver }));
                         dispatch(createDriver({ newDriver }));
                     } catch (error) {
                         console.error('Error creating driver:', error);
                     }
-                  
-
                     break;
                 }
             case 'הצטרפות לנסיעה':
@@ -96,20 +123,20 @@ const GeneralCreate = () => {
                             city: object.get('startingPointCity')?.toString() || '',
                             street: object.get('startingPointStreet')?.toString() || '',
                             numBuild: object.get('startingPointNum')?.toString() || '',
-                        }, 
+                        },
                         target: {
                             city: object.get('targetPointCity')?.toString() || '',
                             street: object.get('targetPointStreet')?.toString() || '',
                             numBuild: object.get('targetPointNum')?.toString() || '',
-                        }, 
+                        },
                         price: parseInt(object.get('price')?.toString() || '15', 10),
                         places: parseInt(object.get('places')?.toString() || '4', 10),
                         passengers: []
                     };
                     try {
                         console.log("newDrive", newDrive);
-                        await axiosDataCreate(newDrive);
-                        dispatch(createDrive({ newDrive }));
+                        axiosDataCreate(newDrive);
+                        dispatch(createDrive({ drive: newDrive }));
                     } catch (error) {
                         console.error('Error creating driver:', error);
                     }

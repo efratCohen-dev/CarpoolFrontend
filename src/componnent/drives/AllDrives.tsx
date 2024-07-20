@@ -9,32 +9,32 @@ import useGet from '../../hooks/Get';
 import DriveDriver from './DriveDriver';
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Loading from '../storybook/Loading';
 const AllDrives = () => {
-    const drives = useAppSelector((state) => state.DriveSlice.drives);
+    const {  axiosData ,res} = useGet(HTTP.DRIVEURL);
     useEffect(() => {
         axiosData();
+    }, []);
+    useEffect(()=>{
         dispatch(getAll({ res: res }));
-    });
-    const { res, axiosData } = useGet(HTTP.DRIVEURL);
+    },[res])
     const dispatch = useDispatch();
-
+    const drives = useAppSelector((state) => state.DriveSlice.drives);
     return (
-        <>
-            <div dir="rtl">
-                <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-                    {
-                        drives.map((d) => {
-                            return (
-                                <>
-                                    <DriveDriver drive={d}/>
-                                </>
-                            )
-                        })
-                    }
-                </List>
-            </div ></>
-
+        <div dir="rtl">
+            <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+                {
+                    drives.map((d) => {
+                        return (
+                            <>
+                                <DriveDriver drive={d} />
+                            </>
+                        )
+                    })
+                }
+            </List>
+        </div >
     );
 }
 export default AllDrives;

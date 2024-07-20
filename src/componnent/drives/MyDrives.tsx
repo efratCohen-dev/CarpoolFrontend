@@ -22,12 +22,15 @@ const MyDrives: React.FC<Props> = ({ driver }) => {
 
     useEffect(() => {
         driver.id && GetById(`${driver.id}`)
-    });
+    },[]);
     const GetById = async (id: String) => {
-        await axiosDataGetById(id);
-        getAll(resGetById)
-        setDrives(resGetById)
+        axiosDataGetById(id);
+        // getAll(resGetById)
+       
     }
+    useEffect(() => {
+        setDrives(resGetById)
+    }, [resGetById])
 
     return (
         <>

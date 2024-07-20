@@ -10,7 +10,7 @@ const AddDriver = () => {
         { placeorder: 'נייד', nameInput: 'tel', typ: 'text', regexPattern: '^[0]{1}[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$' }
     ]
     return (
-        <PopUP title={['כניסה כנהג', 'להתחברות הכנס שם משתמש וסיסמה']} FormProps={inputs} Add={LoginIcon} />
+        <PopUP title={['כניסה כנהג', 'להתחברות הכנס שם משתמש וסיסמה']} FormProps={inputs} Add={LoginIcon} text={'להתחברות'}/>
     )
 };
 export default AddDriver

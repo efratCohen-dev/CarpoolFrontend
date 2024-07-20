@@ -10,7 +10,10 @@ const CurrentDriverSlice = createSlice({
     initialState: initValue,
     reducers: {
         getCurrentDriver: (state, action) => {
+            console.log('getCurrentDriver slice');
             state.currentDriver = action.payload.res;
+            console.log('slice2 currentDriver:', state.currentDriver );
+            
         },
     
         updateDriver: (state, action) => {

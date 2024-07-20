@@ -7,34 +7,31 @@ import { ObjectId } from "mongodb";
 import { getAllDrivers } from "../../store/Driver";
 import OneDrive from "./OneDrive";
 import Loading from "../storybook/Loading";
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface Props {
     drive: IDrive;
 }
-const DriveDriver:React.FC<Props> = ({drive})=>{
+const DriveDriver: React.FC<Props> = ({ drive }) => {
+
+    const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVERURL);
+    const [drivers, setDrivers] = useState<IDriver[]>([])
+    const GetById = async (id: String) => {
+        axiosDataGetById(id);
+    };
+
     useEffect(() => {
         drive.driver && GetById(`${drive.driver}`)
-    });
-    const [drivers, setDrivers] = useState<IDriver[]>([])
-    const { resGetById, axiosDataGetById } = useGetById(HTTP.DRIVERURL);
-
-    const GetById = async (id: String) => {
-        await axiosDataGetById(id);
-        getAllDrivers(resGetById)
-        setDrivers(resGetById)
-    }
-    return(
+    }, []);
+    useEffect(() => {
+        setDrivers(resGetById);
+    }, [resGetById]);
+  
+    return (
         <>
-        {
-            drivers.length>0?drivers.map((driver)=>{
-                return(
-                    <>
-                    <OneDrive drive={drive} driver={driver} />
-                    </>
-                )
-            }):
-            <Loading/>
-        }
+            {drivers[0] ? <OneDrive drive={drive} driver={drivers[0]} />
+                :<Loading/>
+            }
         </>
     )
 };
