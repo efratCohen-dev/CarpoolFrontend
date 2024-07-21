@@ -22,6 +22,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MainProvider } from './componnent/chat/context/MainContext';
 import { SocketProvider } from './componnent/chat/context/SocketContext';
 import { UsersProvider } from './componnent/chat/context/UsersContext';
+import { Flex, FlexSpaceBtween } from './styled/layout.styled';
 
 function App() {
   const cacheRtl = createCache({
@@ -36,13 +37,17 @@ function App() {
         <div dir={theme.direction}>
           {/* <DriversUI /> */}
           {/* <MainProvider> */}
-            <UsersProvider>
-              <SocketProvider>
+          <UsersProvider>
+            <SocketProvider>
+              <Flex>
                 <Search />
-                <AllDrives />
-                <SideMenu />
-              </SocketProvider>
-            </UsersProvider>
+                <FlexSpaceBtween>
+                  <AllDrives />
+                  <SideMenu />
+                </FlexSpaceBtween>
+              </Flex>
+            </SocketProvider>
+          </UsersProvider>
           {/* </MainProvider> */}
         </div>
       </ThemeProvider >

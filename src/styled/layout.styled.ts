@@ -10,3 +10,8 @@ flex-direction: column;
 justify-content: space-between;
 height:100%;
 `;
+export const FlexSpaceBtween = styled.div`
+display:flex;
+justify-content:space-between;
+width:100%;
+`;

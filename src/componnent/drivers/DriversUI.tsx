@@ -60,7 +60,7 @@ const DriversUI = () => {
                 size="small"
                 onChange={(e) => filter(e.target.value)}
             />
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
                 {UI.map((d,index) => {
                     return (
                         <>

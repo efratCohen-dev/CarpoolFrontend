@@ -54,11 +54,12 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
 
     return (
         <React.Fragment>
-            <Button onClick={handleClickOpen}>
-                {text ? <BorderLeft color={theme.palette.primary.main}>
-                    <Add className="icon" sx={{ color: 'white' }} />
-                    <div>{text}</div>
-                </BorderLeft>
+            <Button onClick={handleClickOpen} sx={{ paddingRight: "0px" }}>
+                {text ?
+                    <BorderLeft color={theme.palette.primary.main}>
+                        <Add className="icon" sx={{ color: 'white' }} />
+                        <div>{text}</div>
+                    </BorderLeft>
                     : <Fab>
                         <Add />
                     </Fab>

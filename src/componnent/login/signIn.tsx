@@ -134,7 +134,6 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
