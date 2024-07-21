@@ -24,6 +24,7 @@ import Join from "../login/join";
 import { Button, IconButton } from "@mui/material";
 import { deleteDrive } from "../../store/Drive";
 import EmptyPopUP from '../storybook/EmptyPopUp';
+import Chat from "../chat/chatUI/Chat";
 
 
 
@@ -40,10 +41,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
     const { res, axiosDataDelete } = useDelete(HTTP.DRIVEURL);
     const [currenrDriveID, setCurrenrDriveID] = useState('');
     const [popUp, setPopUP] = useState(false);
+    const [chat, setChat] = useState(false);
 
     useEffect(() => {
-        console.log('res',res);
-        
         if (res !== undefined && res !== null && res !== false) {
             if (res === true) {
                 dispatch(deleteDrive({ id: currenrDriveID }));
@@ -57,22 +57,24 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
     const deleteCurrentDrive = (id: any) => {
         setCurrenrDriveID(`${id}`);
-        axiosDataDelete(id);
+        axiosDataDelete(id,driver);
 
     };
 
     const editDrive = (id: string) => {
-        //יפתח חלונית נסיעה עם הפרטים כברירת מחדל ואפשר עריכה.
-        // נצטרך שבקובץ יצירה נאפשר גם עריכה
         console.log("editDrive", id);
 
     };
 
+    const handelChat = () => {
+        console.log('handelChat 1', chat);
+        setChat(!chat);
+    }
 
     return (
         <>
             {popUp &&
-                <EmptyPopUP />
+                <EmptyPopUP text={['שגיאה','צור אימוות']}/>
             }
             <ListItem alignItems='flex-start'>
                 <ListItemText
@@ -88,14 +90,7 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                         <Avatar key={index} sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{p.name[0]}</Avatar>
                                     )
                                 }
-                                {/* {drive.id && */}
-
-                                {/* // <><h1>vhh { drive.passengers.length <drive.places}</h1> */}
                                 <Join driveID={`${drive.id}`} />
-
-
-
-                                {/* <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar> */}
                             </Flex>
                         </FlexBetween>
                     }
@@ -140,11 +135,12 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
             <IconButton aria-label="delete" color="primary">
                 <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
             </IconButton>
-            <IconButton aria-label="delete" color="primary">
-                <ChatBubbleOutlineIcon fontSize="inherit" onClick={() => chat(`${drive.id}`)} />
+            <IconButton color="primary">
+                <ChatBubbleOutlineIcon onClick={()=>{handelChat()}} />
             </IconButton>
+            {/* {chat && <EmptyPopUP name={driver.name} driveID={new String(drive.id)} />} */}
             <Divider variant="inset" component="li" />
         </>
     )
-}
+};
 export default OneDrive;

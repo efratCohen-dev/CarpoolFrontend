@@ -7,8 +7,6 @@ const useGetById = (url: string) => {
     const [resGetById, setRes] = useState([])
     const axiosDataGetById = async (id:String) => {
         try {            
-            console.log('`${url}/${id}`',`${url}/${id}`);
-            
             const get = await axios.get(`${url}/${id}`)
             setRes(get.data)
         } catch {

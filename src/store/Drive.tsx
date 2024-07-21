@@ -14,19 +14,13 @@ const DriveSlice = createSlice({
     initialState: initValue,
     reducers: {
         getAll: (state, action) => {
-            console.log("drive getAll", action.payload.res);
             state.drives = action.payload.res
         },
         createDrive: (state, action) => {
-            // state.drives.push(action.payload.drive);
-            console.log("action.payload.drive",action.payload.drive);
-            
-            state.drives = [... state.drives,...action.payload.drive]
+            state.drives.push(action.payload.drive);
         },
         deleteDrive: (state, action) => {
-            console.log('state.drives slice');
             state.drives = state.drives.filter(drive => drive.id?.toString() !== action.payload.id);
-            console.log('state.drives slice', state.drives);
 
         },
         updateDrive: (state, action) => {

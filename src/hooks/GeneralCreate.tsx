@@ -6,8 +6,10 @@ import { getCurrentDriver } from "../store/CurrentDriver";
 import { createDriver } from "../store/Driver";
 import { useEffect } from "react";
 import { IDrive } from "../componnent/interface/IDrive";
-import { createDrive } from "../store/Drive";
+import { createDrive, updatePassengersDrive } from "../store/Drive";
 import { AppDispatch, RootState } from "../Store";
+import { IPassenger } from "../componnent/interface/IPassenger";
+import useCreatePassenger from "./CreateNewPassenger";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -16,24 +18,11 @@ const useGeneralCreate = () => {
     const dispatch = useDispatch();
     const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.currentDriver);
     const { res, axiosDataCreate } = useCreate();
+    const { axiosDataCreatePassenger } = useCreatePassenger(HTTP.JOINDRIVEURL);
 
-    useEffect(() => {
-        console.log("res", res)
-        console.log('(res !== undefined && res !== null)', res !== undefined && res !== null);
 
-        if (res !== undefined && res !== null) {
-            console.log("res useEffect", res);
-            if (res as IDriver) {
-                dispatch(createDriver({ driver: res }));
-                dispatch(getCurrentDriver({ res: res }));
 
-            } else {
-                console.log('res useEffect drive', res);
-                
-                dispatch(createDrive({ drive: res }));
-            }
-        }
-    }, [res])
+
     const generalCreate = async (type: string, object: any, ID?: string) => {
         switch (type) {
             case 'כניסה כנהג':
@@ -49,8 +38,8 @@ const useGeneralCreate = () => {
                 } catch (error) {
                     console.error('Error creating driver:', error);
                 }
-
                 break;
+
             case 'יצירת נסיעה חדשה':
                 const newDrive: IDrive = {
                     driver: `${currentDriver.id}`,
@@ -68,21 +57,32 @@ const useGeneralCreate = () => {
                     price: parseInt(object.get('priceOfDrive')?.toString() || '15'),
                     places: parseInt(object.get('numPlacesOfDrive')?.toString() || '4'),
                     passengers: [],
-                    masseges:[]
+                    masseges: []
                 };
                 try {
-                    axiosDataCreate(HTTP.DRIVEURL, newDrive);
-                    console.log('axiosDataCreate drive');
-
+                    axiosDataCreate(HTTP.DRIVEURL, newDrive, currentDriver);
                 } catch (error) {
                     console.error('Error creating driver:', error);
                 }
 
                 break;
-            case 'הצתרפות לנסיעה':
+            case 'הצטרפות לנסיעה':
+                const passenger: IPassenger = {
+                    name: object.get('userName')?.toString() || '',
+                    email: object.get('email')?.toString() || '',
+                };
+                try {
+                    if (ID) {
+                        axiosDataCreatePassenger(passenger, ID);
+                        dispatch(updatePassengersDrive({ id: ID, newPassenger: passenger }));
+                    }
+                } catch (error) {
+                    console.error('Error join passenger:', error);
+                }
                 break;
         }
     }
     return { generalCreate }
 }
 export default useGeneralCreate;
+

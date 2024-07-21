@@ -30,18 +30,9 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
     const [fullWidth, setFullWidth] = useState(true);
     const [signUP, setSignUP] = useState(false);
 
-    const handleInputChange = (attribute: string, value: any) => {
-        // Handle input change if needed
-    };
-
-    // const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
+    //     const handleInputChange = (attribute: string, value: any) => {
+    //         // Handle input change if needed
+    //     };
 
     const handleClose = () => {
         setOpen(false);

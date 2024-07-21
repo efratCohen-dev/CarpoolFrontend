@@ -22,13 +22,16 @@ const DriversUI = () => {
     const dispatch = useDispatch();
     const [expanded, setExpanded] = useState<string | false>('panel1');
     const [isExsit, setIsExsit] = useState(false);
+    const [details, setDetails] = useState(false);
 
     useEffect(() => {
         axiosData();
-    },[]);
-    useEffect(()=>{
+    }, []);
+    useEffect(() => {
         dispatch(getAllDrivers({ res: res }));
-    },[res])
+
+
+    }, [res])
     useEffect(() => {
         if (isExsit) {
             setUI(currentDrivers)
@@ -39,10 +42,9 @@ const DriversUI = () => {
     }, [isExsit, drivers]);
 
 
-    const handleChange =
-        (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-            setExpanded(newExpanded ? panel : false);
-        };
+    const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+        setExpanded(newExpanded ? panel : false);
+    };
     const filter = (f: string) => {
         setIsExsit(true);
         setCurrentDrivers(drivers.filter(driver => driver.name?.includes(f)))
@@ -53,17 +55,16 @@ const DriversUI = () => {
             <TextField
                 hiddenLabel
                 id="filled-hidden-label-small"
-                // label={`חיפוש ${<PersonSearchIcon className="icon"/>}`}
                 label='חיפוש'
                 variant="filled"
                 size="small"
                 onChange={(e) => filter(e.target.value)}
             />
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {UI.map((d) => {
+                {UI.map((d,index) => {
                     return (
                         <>
-                            <Accordion onChange={handleChange('panel1')}>
+                            <Accordion onChange={handleChange('panel1')} >
                                 <AccordionSummary
                                     expandIcon={<ArrowDownwardIcon />}
                                     aria-controls="panel1-content"
@@ -105,8 +106,10 @@ const DriversUI = () => {
                                         </div>
                                     </ListItem >
                                 </AccordionSummary>
+                            
                                 <AccordionDetails>
-                                    <MyDrives driver={d} />
+
+                                     <MyDrives driver={d} /> 
                                 </AccordionDetails>
                                 <Divider variant="inset" component="li" />
                             </Accordion>

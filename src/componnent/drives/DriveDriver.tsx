@@ -19,8 +19,7 @@ const DriveDriver: React.FC<Props> = ({ drive }) => {
     const GetById = async (id: String) => {
         axiosDataGetById(id);
     };
-    useEffect(() => {
-        console.log("drive",drive);    
+    useEffect(() => {  
         drive.driver && GetById(`${drive.driver}`)
     }, []);
     useEffect(() => {
