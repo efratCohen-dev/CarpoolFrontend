@@ -67,8 +67,8 @@ const useGeneralCreate = () => {
                     },
                     price: parseInt(object.get('priceOfDrive')?.toString() || '15'),
                     places: parseInt(object.get('numPlacesOfDrive')?.toString() || '4'),
-                    passengers: []
-                    //chat[] create in intarface and models in servers
+                    passengers: [],
+                    masseges:[]
                 };
                 try {
                     axiosDataCreate(HTTP.DRIVEURL, newDrive);

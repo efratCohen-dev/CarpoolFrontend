@@ -22,9 +22,9 @@ const AllDrives = () => {
     }, [res])
     const dispatch = useDispatch();
     const drives = useAppSelector((state) => state.DriveSlice.drives);
-    useEffect(()=>{
-console.log("drives",drives)
-    },[drives])
+    useEffect(() => {
+        console.log("drives", drives)
+    }, [drives])
     return (
         <div dir="rtl">
             <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>

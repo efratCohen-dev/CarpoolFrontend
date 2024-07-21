@@ -15,13 +15,18 @@ import theme from '../../Theme';
 import { IDriver } from "../interface/IDriver";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+
 import { ObjectId } from "mongodb";
 import useDelete from "../../hooks/Delete";
 import { HTTP } from "../../HTTPpage.contents";
 import Join from "../login/join";
 import { Button, IconButton } from "@mui/material";
 import { deleteDrive } from "../../store/Drive";
-import EmptyPopUP from "../storybook/EmptyPopUp";
+import EmptyPopUP from '../storybook/EmptyPopUp';
+
+
+
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
@@ -134,6 +139,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
             </IconButton >
             <IconButton aria-label="delete" color="primary">
                 <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
+            </IconButton>
+            <IconButton aria-label="delete" color="primary">
+                <ChatBubbleOutlineIcon fontSize="inherit" onClick={() => chat(`${drive.id}`)} />
             </IconButton>
             <Divider variant="inset" component="li" />
         </>
