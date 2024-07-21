@@ -1,15 +1,24 @@
 import axios from "axios"
-import { ObjectId } from 'mongodb'; 
+import { ObjectId } from 'mongodb';
+import Cookies from "cookies-ts"
+import { useState } from "react";
+
 
 const useDelete = (url: string) => {
 
-    const axiosDataDelete = async (id:string) => {
+    const [res,setRes]=useState(false)
+    const axiosDataDelete = async (id: ObjectId) => {
+        const cookies = new Cookies();
         try {
-            const deleteT = await axios.delete(`${url}/${id}`)
+            const deletedrive = await axios.delete(`${url}/${id}`, { data: { token: cookies.get('token') } });
+            setRes(true);
         } catch {
-            console.log("error delete")
+            setRes(false);
+            // console.log("error delete");
+           
+
         }
     }
-    return { axiosDataDelete }
+    return {res, axiosDataDelete }
 }
 export default useDelete

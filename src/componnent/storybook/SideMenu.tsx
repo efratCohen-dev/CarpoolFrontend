@@ -26,27 +26,15 @@ import theme from '../../Theme';
 
 const drawerWidth = 100;
 
-
 const SideMenu = () => {
-    // const theme = useTheme();
+
     const [open, setOpen] = useState(false);
     const [allDrivers, setAllDrivers] = useState(false);
-    // const [addDrive, setAddDrive] = useState(false);
 
-    const handleDrawer = () => {
-        console.log("Icon");
-        setOpen(!open);
-    };
     const handleDrivers = () => {
         setAllDrivers(!allDrivers);
-    }
-    // const handleNewDrive = () => {
-    //     setAddDrive(!addDrive);
-    // }
-
-    const ArrIcon = [ExtensionIcon, LocalShippingIcon, AirportShuttleIcon]
-
-
+    };
+   
     return (
         <div className='margin'>
             <Drawer
@@ -62,12 +50,6 @@ const SideMenu = () => {
                 anchor="right"
             >
                 <Box sx={{ bgcolor: 'secondary.main', height: "100vh"}}>
-
-                    {/* <AirportShuttleIcon
-                    className="icon" 
-                    onClick={setAllDrivers(!allDrivers)}>
-
-                </AirportShuttleIcon> */}
                     <BorderLeft color={theme.palette.primary.main} onClick={handleDrivers}>
                         <GroupIcon className="icon"  sx={{color:'white'}}/>
                         <div>הנהגות שלנו</div>

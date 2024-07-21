@@ -26,7 +26,6 @@ interface Props {
 
 const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
 
-    const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
     const [signUP, setSignUP] = useState(false);
@@ -66,14 +65,14 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
         <React.Fragment>
             <Button onClick={handleClickOpen}>
                 {text ? <BorderLeft color={theme.palette.primary.main}>
-                    <Add className="icon" sx={{color:'white'}}/>
+                    <Add className="icon" sx={{ color: 'white' }} />
                     <div>{text}</div>
                 </BorderLeft>
-                : <Fab>
-                <Add/>
-            </Fab>
+                    : <Fab>
+                        <Add />
+                    </Fab>
 
-            }
+                }
 
             </Button>
             <Dialog

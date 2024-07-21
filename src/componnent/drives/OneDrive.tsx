@@ -21,6 +21,7 @@ import { HTTP } from "../../HTTPpage.contents";
 import Join from "../login/join";
 import { Button, IconButton } from "@mui/material";
 import { deleteDrive } from "../../store/Drive";
+import EmptyPopUP from "../storybook/EmptyPopUp";
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
@@ -31,14 +32,28 @@ interface Props {
 
 
 const OneDrive: React.FC<Props> = ({ drive, driver }) => {
+    const { res, axiosDataDelete } = useDelete(HTTP.DRIVEURL);
+    const [currenrDriveID, setCurrenrDriveID] = useState('');
+    const [popUp, setPopUP] = useState(false);
 
-    const { axiosDataDelete } = useDelete(HTTP.DRIVEURL);
+    useEffect(() => {
+        console.log('res',res);
+        
+        if (res !== undefined && res !== null && res !== false) {
+            if (res === true) {
+                dispatch(deleteDrive({ id: currenrDriveID }));
+            } else {
+                setPopUP(true);
+            }
+        }
+    }, [res])
+
     const dispatch = useDispatch();
 
-    const deleteCurrentDrive = (id: string) => {
+    const deleteCurrentDrive = (id: any) => {
+        setCurrenrDriveID(`${id}`);
         axiosDataDelete(id);
-        dispatch(deleteDrive({id:id}));
-        
+
     };
 
     const editDrive = (id: string) => {
@@ -51,6 +66,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
     return (
         <>
+            {popUp &&
+                <EmptyPopUP />
+            }
             <ListItem alignItems='flex-start'>
                 <ListItemText
                     primary={

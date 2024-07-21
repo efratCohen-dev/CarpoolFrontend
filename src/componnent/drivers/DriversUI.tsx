@@ -3,16 +3,12 @@ import { HTTP } from "../../HTTPpage.contents";
 import useGet from "../../hooks/Get";
 import { getAllDrivers } from "../../store/Driver";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from "@mui/material";
-import React, { Fragment, Suspense, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { AppDispatch, RootState } from "../../Store";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-
-import PersonSearchIcon from '@mui/icons-material/PersonSearch';
-
 import '../../App.css'
 import MyDrives from '../drives/MyDrives'
 import { IDriver } from "../interface/IDriver";
-import { ClassNames } from "@emotion/react";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -68,7 +64,6 @@ const DriversUI = () => {
                     return (
                         <>
                             <Accordion onChange={handleChange('panel1')}>
-                                {/* <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"> */}
                                 <AccordionSummary
                                     expandIcon={<ArrowDownwardIcon />}
                                     aria-controls="panel1-content"
