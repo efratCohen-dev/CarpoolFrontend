@@ -16,7 +16,6 @@ import * as iconsMaterial from '@mui/icons-material';
 import DriversUI from '../drivers/DriversUI';
 import { Grid, Icon } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
-import LoginIcon from '@mui/icons-material/Login';
 
 import '../../App.css'
 import CreatDrive from '../drives/CreateDrive';
@@ -27,26 +26,14 @@ import { FlexColumn } from '../../styled/layout.styled';
 
 const drawerWidth = 100;
 
-
 const SideMenu = () => {
-    // const theme = useTheme();
+
     const [open, setOpen] = useState(false);
     const [allDrivers, setAllDrivers] = useState(false);
-    // const [addDrive, setAddDrive] = useState(false);
 
-    const handleDrawer = () => {
-        console.log("Icon");
-        setOpen(!open);
-    };
     const handleDrivers = () => {
         setAllDrivers(!allDrivers);
-    }
-    // const handleNewDrive = () => {
-    //     setAddDrive(!addDrive);
-    // }
-
-    const ArrIcon = [ExtensionIcon, LocalShippingIcon, AirportShuttleIcon]
-
+    };
 
     return (
         <div className='margin'>

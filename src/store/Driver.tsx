@@ -13,7 +13,7 @@ const DriverSlice = createSlice({
             state.drivers = action.payload.res;
         },
         createDriver: (state, action) => {
-            state.drivers.push(action.payload.driver);
+            state.drivers = [... state.drivers,action.payload.driver]
         },
         deleteDriver: (state, action) => {
             state.drivers = state.drivers.filter(driver => driver.id !== action.payload.id);

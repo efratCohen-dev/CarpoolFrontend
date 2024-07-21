@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IDrive } from '../componnent/interface/IDrive';
 import { RootState } from '../Store';
 
-const initValue: { drives: IDrive[] }  =  {
-    drives:[
+const initValue: { drives: IDrive[] } = {
+    drives: [
         // {id: "string", driver: "string", leavingTime:  new Date(), startingPoint: { city: 'בני ברק', street: 'הרב שך', numBuild: 16 }, destination: { city: 'מודעין עילית', street: 'מרומי שדה', numBuild: 20 }, price: 6, places: 4, passengers: ['אפרת','רבקי'] },
         // {id: "string", driver: "string", leavingTime:  new Date(), startingPoint: { city: 'בית שמש', street: 'ריש לקיש', numBuild: 6 }, destination: { city: 'טלזטון', street: 'רימונים', numBuild: 4 }, price: 6, places: 4, passengers: ['אלישבע'] }
     ]
@@ -14,17 +14,14 @@ const DriveSlice = createSlice({
     initialState: initValue,
     reducers: {
         getAll: (state, action) => {
-            console.log("drive getAll",action.payload.res);
             state.drives = action.payload.res
         },
         createDrive: (state, action) => {
             state.drives.push(action.payload.drive);
         },
         deleteDrive: (state, action) => {
-            console.log('state.drives slice');
             state.drives = state.drives.filter(drive => drive.id?.toString() !== action.payload.id);
-            console.log('state.drives slice',state.drives);
-            
+
         },
         updateDrive: (state, action) => {
             state.drives = state.drives.map(drive => {
@@ -47,10 +44,18 @@ const DriveSlice = createSlice({
                 }
                 return drive;
             });
+        },
+        updatePassengersDrive: (state, action) => {
+            state.drives = state.drives.map(drive => {
+                if (drive.id === action.payload.id) {
+                    drive.passengers.push(action.payload.newPassenger);
+                }
+                return drive;
+            });
         }
 
     }
 });
 
-export const { createDrive, deleteDrive, updateDrive, getAll } = DriveSlice.actions;
+export const { createDrive, deleteDrive, updateDrive, updatePassengersDrive, getAll } = DriveSlice.actions;
 export default DriveSlice.reducer;
