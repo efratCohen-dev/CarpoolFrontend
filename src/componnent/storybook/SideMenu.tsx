@@ -14,7 +14,7 @@ import AirportShuttleIcon from '@mui/icons-material/AirportShuttle';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import * as iconsMaterial from '@mui/icons-material';
 import DriversUI from '../drivers/DriversUI';
-import { Icon } from '@mui/material';
+import { Grid, Icon } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import LoginIcon from '@mui/icons-material/Login';
 
@@ -23,6 +23,7 @@ import CreatDrive from '../drives/CreateDrive';
 import AddDriver from '../drivers/AddDiver';
 import { BorderLeft } from '../../styled/style.styled';
 import theme from '../../Theme';
+import { FlexColumn } from '../../styled/layout.styled';
 
 const drawerWidth = 100;
 
@@ -61,19 +62,24 @@ const SideMenu = () => {
                 variant="permanent"
                 anchor="right"
             >
-                <Box sx={{ bgcolor: 'secondary.main', height: "100vh"}}>
-
-                    {/* <AirportShuttleIcon
-                    className="icon" 
-                    onClick={setAllDrivers(!allDrivers)}>
-
-                </AirportShuttleIcon> */}
-                    <BorderLeft color={theme.palette.primary.main} onClick={handleDrivers}>
-                        <GroupIcon className="icon"  sx={{color:'white'}}/>
-                        <div>הנהגות שלנו</div>
-                    </BorderLeft>
-                    <AddDriver />
-                    <CreatDrive />
+                <Box sx={{ bgcolor: 'secondary.main', height: "100vh" }}>
+                    <FlexColumn>
+                        <Grid
+                            container
+                            direction="column"
+                            alignItems=" flex-end"
+                            justifyContent="space-evenly"
+                            height={"160px"}
+                        >
+                            <BorderLeft color={theme.palette.primary.main} onClick={handleDrivers}>
+                                <GroupIcon className="icon" sx={{ color: 'white' }} />
+                                <div>הנהגות שלנו</div>
+                            </BorderLeft>
+                            <Divider />
+                            <AddDriver />
+                        </Grid>
+                        <CreatDrive />
+                    </FlexColumn>
                 </Box>
             </Drawer>
             {

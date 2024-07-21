@@ -27,10 +27,12 @@ function App() {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
+      <div dir={theme.direction}>
         {/* <DriversUI /> */}
-        {/* <Search /> */}
+        <Search/>
         <AllDrives />
         <SideMenu/>
+        </div>
       </ThemeProvider>
     </CacheProvider >
   );
