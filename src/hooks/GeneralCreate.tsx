@@ -43,7 +43,7 @@ const useGeneralCreate = () => {
             case 'יצירת נסיעה חדשה':
                 const newDrive: IDrive = {
                     driver: `${currentDriver.id}`,
-                    leavingTime: object.get('time')?.toString() || '',
+                    leavingTime: object.get('time'),
                     startingPoint: {
                         city: object.get('startingPointCity')?.toString() || '',
                         street: object.get('startingPointStreet')?.toString() || '',
@@ -60,6 +60,8 @@ const useGeneralCreate = () => {
                     masseges: []
                 };
                 try {
+                     console.log('newDrive',newDrive);
+                     
                     axiosDataCreate(HTTP.DRIVEURL, newDrive, currentDriver);
                 } catch (error) {
                     console.error('Error creating driver:', error);

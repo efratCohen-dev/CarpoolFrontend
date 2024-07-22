@@ -9,12 +9,12 @@ import { Fragment, useEffect } from 'react';
 import Chat from '../chat/chatUI/Chat';
 
 interface Props {
-    // name: String;
-    // driveID: String;
-    text:string[]
+    name: String;
+    driveID: String;
+    // text:string[]
 }
 
-const EmptyPopUP: React.FC<Props> = ({ text }) => {
+const EmptyPopUP: React.FC<Props> = ({ name, driveID }) => {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
@@ -38,27 +38,27 @@ const EmptyPopUP: React.FC<Props> = ({ text }) => {
                     width: 800,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
-                      boxSizing: 'border-box',
+                        boxSizing: 'border-box',
                     },
-                  }}
+                }}
             // aria-labelledby="scroll-dialog-title"
             // aria-describedby="scroll-dialog-description"
             >
                 {/* <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle> */}
-            <DialogContent >
-                    <h1>  שגיאה!!!!</h1>
+                <DialogContent >
+                    {/* <h1>  שגיאה!!!!</h1>
                     <br />
                     <p>אין הרשאות למחיקה, צור אימות</p>
-                    {text[1]}
-            {/* <Chat name={name} room={driveID} /> */}
-           
+                    {text[1]} */}
+                    <Chat name={name} room={driveID} />
 
 
 
-            </DialogContent> 
+
+                </DialogContent>
 
             </Dialog>
-            
+
         </Fragment>
     );
 };

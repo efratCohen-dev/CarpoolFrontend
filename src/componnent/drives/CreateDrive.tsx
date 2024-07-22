@@ -12,7 +12,7 @@ const CreatDrive = () => {
         { placeorder: 'עיר יעד', nameInput: 'destinationPointCity', typ: 'text',regexPattern: '^\.[^0-9]{0,}$'},
         { placeorder: 'רחוב יעד', nameInput: 'destinationPointStreet', typ: 'text',regexPattern: '^\.[^0-9]{0,}$'},
         { placeorder: 'מספר ביניין יעד', nameInput: 'destinationPointNum', typ: 'text',regexPattern: '[0-9]'},
-        { placeorder: 'יציאה משוערת', nameInput: 'time', typ: 'time'},
+        { placeorder: 'יציאה משוערת', nameInput: 'time', typ: 'datetime-local'},
     ]
 
     return (

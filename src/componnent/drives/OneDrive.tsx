@@ -44,10 +44,15 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
     const [chat, setChat] = useState(false);
 
     useEffect(() => {
+
         if (res !== undefined && res !== null && res !== false) {
             if (res === true) {
+                console.log('useEffect res delete', res);
+                console.log('currenrDriveID', currenrDriveID);
+
                 dispatch(deleteDrive({ id: currenrDriveID }));
             } else {
+                console.log('useEffect res delete', res);
                 setPopUP(true);
             }
         }
@@ -56,8 +61,10 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
     const dispatch = useDispatch();
 
     const deleteCurrentDrive = (id: any) => {
+        console.log('deleteCurrentDrive id', id);
+
         setCurrenrDriveID(`${id}`);
-        axiosDataDelete(id,driver);
+        axiosDataDelete(id, driver);
 
     };
 
@@ -73,9 +80,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
     return (
         <>
-            {popUp &&
+            {/* {popUp &&
                 <EmptyPopUP text={['שגיאה','צור אימוות']}/>
-            }
+            } */}
             <ListItem alignItems='flex-start'>
                 <ListItemText
                     primary={
@@ -90,7 +97,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                         <Avatar key={index} sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{p.name[0]}</Avatar>
                                     )
                                 }
-                                <Join driveID={`${drive.id}`} />
+                                {drive.passengers.length < drive.places &&
+                                    <Join driveID={`${drive.id}`} />
+                                }
                             </Flex>
                         </FlexBetween>
                     }
@@ -136,9 +145,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                 <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
             </IconButton>
             <IconButton color="primary">
-                <ChatBubbleOutlineIcon onClick={()=>{handelChat()}} />
+                <ChatBubbleOutlineIcon onClick={() => { handelChat() }} />
             </IconButton>
-            {/* {chat && <EmptyPopUP name={driver.name} driveID={new String(drive.id)} />} */}
+            {chat && <EmptyPopUP name={driver.name} driveID={new String(drive.id)} />}
             <Divider variant="inset" component="li" />
         </>
     )

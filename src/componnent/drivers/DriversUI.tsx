@@ -9,6 +9,8 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import '../../App.css'
 import MyDrives from '../drives/MyDrives'
 import { IDriver } from "../interface/IDriver";
+import theme from "../../Theme";
+import { PositionSticky } from "../../styled/style.styled";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -29,39 +31,42 @@ const DriversUI = () => {
     }, []);
     useEffect(() => {
         dispatch(getAllDrivers({ res: res }));
+    }, [res]);
 
-
-    }, [res])
     useEffect(() => {
+        console.log('isExsit useEffect', isExsit);
         if (isExsit) {
             setUI(currentDrivers)
         }
         else {
             setUI(drivers)
         }
-    }, [isExsit, drivers]);
+    }, [isExsit, drivers, details]);
 
 
     const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
         setExpanded(newExpanded ? panel : false);
     };
     const filter = (f: string) => {
+        setDetails(!details)
         setIsExsit(true);
         setCurrentDrivers(drivers.filter(driver => driver.name?.includes(f)))
     }
 
     return (
         <>
-            <TextField
-                hiddenLabel
-                id="filled-hidden-label-small"
-                label='חיפוש'
-                variant="filled"
-                size="small"
-                onChange={(e) => filter(e.target.value)}
-            />
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-                {UI.map((d,index) => {
+            {/* <PositionSticky> */}
+                <TextField className="PositionSticky"
+                    hiddenLabel
+                    id="filled-hidden-label-small"
+                    label='חיפוש'
+                    variant="filled"
+                    size="small"
+                    onChange={(e) => filter(e.target.value)}
+                />
+            {/* </PositionSticky> */}
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {UI.map((d) => {
                     return (
                         <>
                             <Accordion onChange={handleChange('panel1')} >
@@ -72,7 +77,7 @@ const DriversUI = () => {
                                 >
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
-                                            <Avatar alt="Cindy Baker">{d.name.slice(0, 1)}</Avatar>
+                                            <Avatar alt="Cindy Baker" sx={{ color: theme.palette.primary.main }}>{d.name.slice(0, 1)}</Avatar>
                                         </ListItemAvatar>
                                         <div className="allDrivers">
                                             <ListItemText
@@ -106,10 +111,10 @@ const DriversUI = () => {
                                         </div>
                                     </ListItem >
                                 </AccordionSummary>
-                            
+
                                 <AccordionDetails>
 
-                                     <MyDrives driver={d} /> 
+                                    <MyDrives driver={d} />
                                 </AccordionDetails>
                                 <Divider variant="inset" component="li" />
                             </Accordion>

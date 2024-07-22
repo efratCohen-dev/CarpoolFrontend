@@ -34,7 +34,7 @@ const Search = () => {
             <OutlinedInput placeholder="נקודת התחלה" size='small' />
             <OutlinedInput placeholder="נקודת יעד" size='small' />
           </Grid>
-          <Logo src="../../assets/logo.png" alt='logo' />
+          {/* <Logo src="../../assets/logo.png" alt='logo' /> */}
         </FlexColumn>
       </Drawer>
     </div>

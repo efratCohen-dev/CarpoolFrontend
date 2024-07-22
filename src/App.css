@@ -40,6 +40,14 @@
   width: 60%;
 
 }
+
+.PositionSticky {
+position: -webkit-sticky; /* Safari */
+position: sticky;
+top: 0;
+background-color: yellow;
+}
+
 .icon{
   color: black;
   /* font-size: 50px; */
