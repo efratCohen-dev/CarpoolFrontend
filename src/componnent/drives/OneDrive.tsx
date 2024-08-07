@@ -15,12 +15,15 @@ import theme from '../../Theme';
 import { IDriver } from "../interface/IDriver";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { ObjectId } from "mongodb";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import useDelete from "../../hooks/Delete";
 import { HTTP } from "../../HTTPpage.contents";
 import Join from "../login/join";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { deleteDrive } from "../../store/Drive";
+import EmptyPopUP from '../storybook/EmptyPopUp';
+
+
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
@@ -31,23 +34,45 @@ interface Props {
 
 
 const OneDrive: React.FC<Props> = ({ drive, driver }) => {
+    const { res, axiosDataDelete } = useDelete(HTTP.DRIVEURL);
+    const [currenrDriveID, setCurrenrDriveID] = useState('');
+    const [popUp, setPopUP] = useState(false);
+    const [chat, setChat] = useState(false);
 
-    const { axiosDataDelete } = useDelete(HTTP.DRIVEURL);
+    useEffect(() => {
+
+        if (res !== undefined && res !== null && res !== false) {
+            if (res === true) {
+                console.log('useEffect res delete', res);
+                console.log('currenrDriveID', currenrDriveID);
+
+                dispatch(deleteDrive({ id: currenrDriveID }));
+            } else {
+                console.log('useEffect res delete', res);
+                setPopUP(true);
+            }
+        }
+    }, [res])
+
     const dispatch = useDispatch();
 
-    const deleteCurrentDrive = (id: string) => {
-        axiosDataDelete(id);
-        dispatch(deleteDrive({id:id}));
-        
+    const deleteCurrentDrive = (id: any) => {
+        console.log('deleteCurrentDrive id', id);
+
+        setCurrenrDriveID(`${id}`);
+        axiosDataDelete(id, driver);
+
     };
 
     const editDrive = (id: string) => {
-        //יפתח חלונית נסיעה עם הפרטים כברירת מחדל ואפשר עריכה.
-        // נצטרך שבקובץ יצירה נאפשר גם עריכה
         console.log("editDrive", id);
 
     };
 
+    const handelChat = () => {
+        console.log('handelChat 1', chat);
+        setChat(!chat);
+    }
 
     return (
         <>
@@ -65,14 +90,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                                         <Avatar key={index} sx={{ width: 24, height: 24, bgcolor: theme.palette.primary.main }} >{p.name[0]}</Avatar>
                                     )
                                 }
-                                {/* {drive.id && */}
-
-                                {/* // <><h1>vhh { drive.passengers.length <drive.places}</h1> */}
-                                <Join driveID={`${drive.id}`} />
-
-
-
-                                {/* <Avatar sx={{ width: 24, height: 24 }} onClick={() => addPassenger(drive)}>+</Avatar> */}
+                                {drive.passengers.length < drive.places &&
+                                    <Join driveID={`${drive.id}`} />
+                                }
                             </Flex>
                         </FlexBetween>
                     }
@@ -117,8 +137,12 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
             <IconButton aria-label="delete" color="primary">
                 <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
             </IconButton>
+            <IconButton color="primary">
+                <ChatBubbleOutlineIcon onClick={() => { handelChat() }} />
+            </IconButton>
+            {chat && <EmptyPopUP name={driver.name} driveID={new String(drive.id)} />}
             <Divider variant="inset" component="li" />
         </>
     )
-}
+};
 export default OneDrive;

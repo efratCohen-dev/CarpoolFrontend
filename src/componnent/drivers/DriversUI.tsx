@@ -3,16 +3,14 @@ import { HTTP } from "../../HTTPpage.contents";
 import useGet from "../../hooks/Get";
 import { getAllDrivers } from "../../store/Driver";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from "@mui/material";
-import React, { Fragment, Suspense, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { AppDispatch, RootState } from "../../Store";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-
-import PersonSearchIcon from '@mui/icons-material/PersonSearch';
-
 import '../../App.css'
 import MyDrives from '../drives/MyDrives'
 import { IDriver } from "../interface/IDriver";
-import { ClassNames } from "@emotion/react";
+import theme from "../../Theme";
+import { PositionSticky } from "../../styled/style.styled";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -26,49 +24,52 @@ const DriversUI = () => {
     const dispatch = useDispatch();
     const [expanded, setExpanded] = useState<string | false>('panel1');
     const [isExsit, setIsExsit] = useState(false);
+    const [details, setDetails] = useState(false);
 
     useEffect(() => {
         axiosData();
-    },[]);
-    useEffect(()=>{
-        dispatch(getAllDrivers({ res: res }));
-    },[res])
+    }, []);
     useEffect(() => {
+        dispatch(getAllDrivers({ res: res }));
+    }, [res]);
+
+    useEffect(() => {
+        console.log('isExsit useEffect', isExsit);
         if (isExsit) {
             setUI(currentDrivers)
         }
         else {
             setUI(drivers)
         }
-    }, [isExsit, drivers]);
+    }, [isExsit, drivers, details]);
 
 
-    const handleChange =
-        (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-            setExpanded(newExpanded ? panel : false);
-        };
+    const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+        setExpanded(newExpanded ? panel : false);
+    };
     const filter = (f: string) => {
+        setDetails(!details)
         setIsExsit(true);
         setCurrentDrivers(drivers.filter(driver => driver.name?.includes(f)))
     }
 
     return (
         <>
-            <TextField
-                hiddenLabel
-                id="filled-hidden-label-small"
-                // label={`חיפוש ${<PersonSearchIcon className="icon"/>}`}
-                label='חיפוש'
-                variant="filled"
-                size="small"
-                onChange={(e) => filter(e.target.value)}
-            />
+            {/* <PositionSticky> */}
+                <TextField className="PositionSticky"
+                    hiddenLabel
+                    id="filled-hidden-label-small"
+                    label='חיפוש'
+                    variant="filled"
+                    size="small"
+                    onChange={(e) => filter(e.target.value)}
+                />
+            {/* </PositionSticky> */}
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {UI.map((d) => {
                     return (
                         <>
-                            <Accordion onChange={handleChange('panel1')}>
-                                {/* <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"> */}
+                            <Accordion onChange={handleChange('panel1')} >
                                 <AccordionSummary
                                     expandIcon={<ArrowDownwardIcon />}
                                     aria-controls="panel1-content"
@@ -76,7 +77,7 @@ const DriversUI = () => {
                                 >
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
-                                            <Avatar alt="Cindy Baker">{d.name.slice(0, 1)}</Avatar>
+                                            <Avatar alt="Cindy Baker" sx={{ color: theme.palette.primary.main }}>{d.name.slice(0, 1)}</Avatar>
                                         </ListItemAvatar>
                                         <div className="allDrivers">
                                             <ListItemText
@@ -110,7 +111,9 @@ const DriversUI = () => {
                                         </div>
                                     </ListItem >
                                 </AccordionSummary>
+
                                 <AccordionDetails>
+
                                     <MyDrives driver={d} />
                                 </AccordionDetails>
                                 <Divider variant="inset" component="li" />

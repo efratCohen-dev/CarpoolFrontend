@@ -1,17 +1,15 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../Store";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "../../Store";
 
-export const useAppDispatch = (type: string) => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
 interface Props {
     type: string;
 };
 const DefaultDetails: React.FC<Props> = ({ type }) => {
-    // const dispatch = useDispatch();
+    const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.currentDriver);
     switch (type) {
-        case 'יצירת נסיעה חדשה': {
-            const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.currentDriver);
+        case 'יצירת נסיעה חדשה':
+
             return (
                 <>
                     {
@@ -25,25 +23,12 @@ const DefaultDetails: React.FC<Props> = ({ type }) => {
 
 
             );
-            break;
-        }
+
         default:
-            break;
-
-        // case 'עדכון נסיעה': {
-        //     const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.driver);
-        //     return (
-        //         <>
-        //             <h1>{currentDriver.name} </h1>
-        //             < h1 > {currentDriver.email} </h1>
-        //             < h1 > {currentDriver.phone} </h1>
-        //         </>
-        //     )
-        // }
-    }
-    return (
-        <></>
-    )
-
+            return (
+                <>
+                </>
+            )
+    };
 };
 export default DefaultDetails

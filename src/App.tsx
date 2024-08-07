@@ -16,6 +16,13 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Drawer, List } from '@mui/material';
 import CreatDrive from './componnent/drives/CreateDrive';
 import AddDriver from './componnent/drivers/AddDiver';
+// import { Flex, ChakraProvider } from '@chakra-ui/react';
+import { Login } from '@mui/icons-material';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { MainProvider } from './componnent/chat/context/MainContext';
+import { SocketProvider } from './componnent/chat/context/SocketContext';
+import { UsersProvider } from './componnent/chat/context/UsersContext';
+import { Flex, FlexSpaceBtween } from './styled/layout.styled';
 
 function App() {
   const cacheRtl = createCache({
@@ -27,12 +34,25 @@ function App() {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
-        {/* <DriversUI /> */}
-        {/* <Search /> */}
-        <AllDrives />
-        <SideMenu/>
-      </ThemeProvider>
+        <div dir={theme.direction}>
+          {/* <DriversUI /> */}
+          {/* <MainProvider> */}
+          <UsersProvider>
+            <SocketProvider>
+              <Flex>
+                <Search />
+                <FlexSpaceBtween>
+                  <AllDrives />
+                  <SideMenu />
+                </FlexSpaceBtween>
+              </Flex>
+            </SocketProvider>
+          </UsersProvider>
+          {/* </MainProvider> */}
+        </div>
+      </ThemeProvider >
     </CacheProvider >
+
   );
 }
 export default App

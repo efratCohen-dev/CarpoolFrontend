@@ -6,81 +6,67 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import InputLogin from '../storybook/InputLogin';
 import { useDispatch } from 'react-redux';
-import useCreate from '../../hooks/Create';
-import { HTTP } from '../../HTTPpage.contents';
-import { createDriver } from '../../store/Driver';
 import { AppDispatch } from '../../Store';
-import { IDriver } from '../interface/IDriver';
-import { IInput } from '../interface/IInput';
-import { createTheme, List } from '@mui/material';
-import GeneralCreate from '../../hooks/GeneralCreate';
-import { ObjectId } from 'mongodb';
+import  { IInput }  from '../interface/IInput';
 import DefaultDetails from './DefaultDetails';
-const defaultTheme = createTheme();
+import useGeneralCreate from '../../hooks/GeneralCreate';
+
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
   login: string;
   driveID?: string;
   handleClose: () => void;
-
 };
 
 const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => {
-
   const dispatch = useDispatch();
-  const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
-  const { AxiosDataGeneralCreate } = GeneralCreate();
+  const { generalCreate } = useGeneralCreate();
   const [sign, setSign] = useState(false)
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);    
-    
-    // if (driveID){
-      AxiosDataGeneralCreate(login, data, driveID)
+    const data = new FormData(event.currentTarget);
 
-    // }else{
-      // AxiosDataGeneralCreate(login, data);
-    // }
+    generalCreate(login, data, driveID);
     handleClose();
   };
+
   const signChange = () => {
     setSign(!sign);
-    // changeTitle();
   }
 
   return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline/>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <DefaultDetails type={login}/>
-            <Grid container spacing={2}>
-              {FormProps.map((input) => (
-                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern}/>
-              ))
-              }
-
-            </Grid>
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >{login}</Button>
-            {!sign ?
-              <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
-              : <Button size="small" onClick={signChange}>signיש לך חשבון?</Button>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <DefaultDetails type={login} />
+          <Grid container spacing={2}>
+            {FormProps.map((input) => (
+              <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+            ))
             }
-          </Box>
+
+          </Grid>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >{login}</Button>
+          {login === 'כניסה כנהג' ? (!sign ?
+            <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
+            : <Button size="small" onClick={signChange}> לך חשבון?</Button>):null
+          }
         </Box>
-      </Container>
+      </Box>
+    </Container>
   );
 }
 export default SignIn

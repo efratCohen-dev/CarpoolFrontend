@@ -26,23 +26,13 @@ interface Props {
 
 const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
 
-    const { axiosDataCreate } = useCreate(HTTP.DRIVERURL);
     const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
     const [signUP, setSignUP] = useState(false);
 
-    const handleInputChange = (attribute: string, value: any) => {
-        // Handle input change if needed
-    };
-
-    // const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
+    //     const handleInputChange = (attribute: string, value: any) => {
+    //         // Handle input change if needed
+    //     };
 
     const handleClose = () => {
         setOpen(false);
@@ -64,16 +54,17 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
 
     return (
         <React.Fragment>
-            <Button onClick={handleClickOpen}>
-                {text ? <BorderLeft color={theme.palette.primary.main}>
-                    <Add className="icon" sx={{color:'white'}}/>
-                    <div>{text}</div>
-                </BorderLeft>
-                : <Fab>
-                <Add/>
-            </Fab>
+            <Button onClick={handleClickOpen} sx={{ paddingRight: "0px" }}>
+                {text ?
+                    <BorderLeft color={theme.palette.primary.main}>
+                        <Add className="icon" sx={{ color: 'white' }} />
+                        <div>{text}</div>
+                    </BorderLeft>
+                    : <Fab>
+                        <Add />
+                    </Fab>
 
-            }
+                }
 
             </Button>
             <Dialog
