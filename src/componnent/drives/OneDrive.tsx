@@ -43,12 +43,8 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
         if (res !== undefined && res !== null && res !== false) {
             if (res === true) {
-                console.log('useEffect res delete', res);
-                console.log('currenrDriveID', currenrDriveID);
-
                 dispatch(deleteDrive({ id: currenrDriveID }));
             } else {
-                console.log('useEffect res delete', res);
                 setPopUP(true);
             }
         }
@@ -57,8 +53,6 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
     const dispatch = useDispatch();
 
     const deleteCurrentDrive = (id: any) => {
-        console.log('deleteCurrentDrive id', id);
-
         setCurrenrDriveID(`${id}`);
         axiosDataDelete(id, driver);
 
@@ -66,11 +60,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
     const editDrive = (id: string) => {
         console.log("editDrive", id);
-
     };
 
     const handelChat = () => {
-        console.log('handelChat 1', chat);
         setChat(!chat);
     }
 

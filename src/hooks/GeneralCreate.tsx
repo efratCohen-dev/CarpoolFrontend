@@ -59,9 +59,7 @@ const useGeneralCreate = () => {
                     passengers: [],
                     masseges: []
                 };
-                try {
-                     console.log('newDrive',newDrive);
-                     
+                try {                     
                     axiosDataCreate(HTTP.DRIVEURL, newDrive, currentDriver);
                 } catch (error) {
                     console.error('Error creating driver:', error);

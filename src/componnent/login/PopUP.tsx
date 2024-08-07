@@ -41,13 +41,6 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
         setOpen(true);
     };
 
-
-    const onSubmit: SubmitHandler<FormData> = (data) => {
-        console.log(data);
-    };
-
-
-
     const changeTitle = useCallback(() => {
         // setTitle('הכנס כמשתמש חדש')
     }, [title]);

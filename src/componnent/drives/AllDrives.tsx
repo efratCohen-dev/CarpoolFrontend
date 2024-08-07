@@ -9,7 +9,6 @@ import useGet from '../../hooks/Get';
 import DriveDriver from './DriveDriver';
 import CircularProgress from '@mui/material/CircularProgress';
 import Loading from '../storybook/Loading';
-import { log } from 'console';
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 const AllDrives = () => {

@@ -19,13 +19,8 @@ const DriveSlice = createSlice({
         createDrive: (state, action) => {
             state.drives.push(action.payload.drive);
         },
-        deleteDrive: (state, action) => {
-            console.log('deleteDrive action.payload.id',action.payload.id);
-            console.log('state.drives 1',initValue);
-            
+        deleteDrive: (state, action) => {            
             state.drives = state.drives.filter(drive => drive.id?.toString() !== action.payload.id.toString());
-            console.log('state.drives 2',state.drives);
-
         },
         updateDrive: (state, action) => {
             state.drives = state.drives.map(drive => {

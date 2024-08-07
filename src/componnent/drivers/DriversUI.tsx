@@ -34,7 +34,6 @@ const DriversUI = () => {
     }, [res]);
 
     useEffect(() => {
-        console.log('isExsit useEffect', isExsit);
         if (isExsit) {
             setUI(currentDrivers)
         }
