@@ -16,5 +16,4 @@ export const PositionSticky = styled.div`
 position: -webkit-sticky; /* Safari */
 position: sticky;
 top: 0;
-background-color: yellow;
 `;

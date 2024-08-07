@@ -16,16 +16,12 @@ import { IDriver } from "../interface/IDriver";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-
-import { ObjectId } from "mongodb";
 import useDelete from "../../hooks/Delete";
 import { HTTP } from "../../HTTPpage.contents";
 import Join from "../login/join";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { deleteDrive } from "../../store/Drive";
 import EmptyPopUP from '../storybook/EmptyPopUp';
-import Chat from "../chat/chatUI/Chat";
-
 
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
@@ -80,9 +76,6 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
     return (
         <>
-            {/* {popUp &&
-                <EmptyPopUP text={['שגיאה','צור אימוות']}/>
-            } */}
             <ListItem alignItems='flex-start'>
                 <ListItemText
                     primary={
