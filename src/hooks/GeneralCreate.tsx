@@ -30,7 +30,7 @@ const useGeneralCreate = () => {
                     name: object.get('userName')?.toString() || '',
                     password: object.get('password')?.toString() || '',
                     email: object.get('email')?.toString() || '',
-                    phone: parseInt(object.get('tel')?.toString() || '0', 10)
+                    phone: object.get('tel')?.toString() || ''
                 };
                 try {
                     axiosDataCreate(HTTP.DRIVERURL, newDriver);

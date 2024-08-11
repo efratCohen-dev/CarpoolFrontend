@@ -7,19 +7,20 @@ import Container from '@mui/material/Container';
 import InputLogin from '../storybook/InputLogin';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../Store';
-import  { IInput }  from '../interface/IInput';
+import { IInput } from '../interface/IInput';
 import DefaultDetails from './DefaultDetails';
 import useGeneralCreate from '../../hooks/GeneralCreate';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 interface Props {
   FormProps: IInput[];
+  inputNew?: IInput[] | null;
   login: string;
   driveID?: string;
   handleClose: () => void;
 };
 
-const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => {
+const SignIn: React.FC<Props> = ({ FormProps, inputNew, handleClose, login, driveID }) => {
   const dispatch = useDispatch();
   const { generalCreate } = useGeneralCreate();
   const [sign, setSign] = useState(false)
@@ -49,9 +50,16 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <DefaultDetails type={login} />
           <Grid container spacing={2}>
-            {FormProps.map((input) => (
-              <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
-            ))
+            {
+              FormProps.map((input) => (
+                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+              ))
+            }
+            {login === 'כניסה כנהג' && inputNew != null ? (sign &&
+              inputNew.map((input) => (
+                <InputLogin placeorder={input.placeorder} nameInput={input.nameInput} typ={input.typ} regexPattern={input.regexPattern} />
+              ))
+            ) : null
             }
 
           </Grid>
@@ -62,7 +70,7 @@ const SignIn: React.FC<Props> = ({ FormProps, handleClose, login, driveID }) => 
           >{login}</Button>
           {login === 'כניסה כנהג' ? (!sign ?
             <Button size="small" onClick={signChange}>אין לך חשבון?</Button>
-            : <Button size="small" onClick={signChange}> לך חשבון?</Button>):null
+            : <Button size="small" onClick={signChange}>יש לך חשבון?</Button>) : null
           }
         </Box>
       </Box>

@@ -5,5 +5,5 @@ export interface IDriver {
     name: String,
     password:String,
     email:String,
-    phone:number
+    phone:String
 };
