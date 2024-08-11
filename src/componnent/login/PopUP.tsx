@@ -18,13 +18,14 @@ import CreatDrive from '../drives/CreateDrive';
 import { BorderLeft } from '../../styled/style.styled';
 interface Props {
     FormProps: IInput[];
+    inputNew?: IInput[] | null;
     title: string[];
     driveID?: string;
     text?: String
     Add: iconsMaterial.SvgIconComponent;
 }
 
-const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
+const PopUP: React.FC<Props> = ({ FormProps, inputNew, title, Add, driveID, text }) => {
 
     const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
@@ -73,10 +74,10 @@ const PopUP: React.FC<Props> = ({ FormProps, title, Add, driveID, text }) => {
                     <DialogContentText>
                         {title[1]}
                     </DialogContentText>
-                    {/* <ChildComponent onClick={handleClose} /> */}
-                    {/* setTitle={setTitle} */}
-                    {/* <Join onClick={handleClose}/> */}
-                    <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} driveID={driveID} />
+                    {inputNew != null ?
+                        <SignIn handleClose={handleClose} FormProps={FormProps} inputNew={inputNew} login={title[0]} driveID={driveID} />
+                        : <SignIn handleClose={handleClose} FormProps={FormProps} login={title[0]} driveID={driveID} />
+                    }
                 </DialogContent>
             </Dialog>
 
