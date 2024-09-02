@@ -8,7 +8,26 @@ interface Props {
 const DefaultDetails: React.FC<Props> = ({ type }) => {
     const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.currentDriver);
     switch (type) {
-        case 'יצירת נסיעה חדשה':
+        case 'יצירת נסיעה חדשה' || 'עדכון נסיעה':
+            console.log(type);
+
+
+            return (
+                <>
+                    {
+                        currentDriver && <>
+                            <h1>{currentDriver.name} </h1>
+                            < h1 > {currentDriver.email} </h1>
+                            < h1 > {currentDriver.phone} </h1>
+                        </>
+                    }
+                </>
+
+
+            );
+        case 'עדכון נסיעה':
+            console.log(type);
+
 
             return (
                 <>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, Fragment } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -16,6 +16,7 @@ import theme from '../../Theme';
 import { ObjectId } from 'mongodb';
 import CreatDrive from '../drives/CreateDrive';
 import { BorderLeft } from '../../styled/style.styled';
+import { Box, IconButton } from '@mui/material';
 interface Props {
     FormProps: IInput[];
     inputNew?: IInput[] | null;
@@ -47,13 +48,22 @@ const PopUP: React.FC<Props> = ({ FormProps, inputNew, title, Add, driveID, text
     }, [title]);
 
     return (
-        <React.Fragment>
+        <Fragment>
+            {/* הייתי רוצה להוריד את התגית הכפתור לשים שם BOX
+            זה מפריע לpanding */}
             <Button onClick={handleClickOpen} sx={{ paddingRight: "0px" }}>
-                {text ?
+                {text ? (text === 'להתחברות' ?
                     <BorderLeft color={theme.palette.primary.main}>
                         <Add className="icon" sx={{ color: 'white' }} />
                         <div>{text}</div>
                     </BorderLeft>
+                    :
+                    <IconButton color="primary">
+                        <Add />
+                    </IconButton>)
+
+                        // <Add className="icon"  />
+
                     : <Fab>
                         <Add />
                     </Fab>
@@ -81,7 +91,7 @@ const PopUP: React.FC<Props> = ({ FormProps, inputNew, title, Add, driveID, text
                 </DialogContent>
             </Dialog>
 
-        </React.Fragment>
+        </Fragment>
 
     );
 };
