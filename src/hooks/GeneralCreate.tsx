@@ -10,14 +10,17 @@ import { createDrive, updatePassengersDrive } from "../store/Drive";
 import { AppDispatch, RootState } from "../Store";
 import { IPassenger } from "../componnent/interface/IPassenger";
 import useCreatePassenger from "./CreateNewPassenger";
+import useUpdate from "./Update";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 const useGeneralCreate = () => {
     const dispatch = useDispatch();
+    const drives = useAppSelector((state) => state.DriveSlice.drives);
     const currentDriver = useAppSelector((state) => state.CurrentDriverSlice.currentDriver);
     const { res, axiosDataCreate } = useCreate();
+    const { axiosDataPut } = useUpdate();
     const { axiosDataCreatePassenger } = useCreatePassenger(HTTP.JOINDRIVEURL);
 
 
@@ -59,7 +62,7 @@ const useGeneralCreate = () => {
                     passengers: [],
                     masseges: []
                 };
-                try {                     
+                try {
                     axiosDataCreate(HTTP.DRIVEURL, newDrive, currentDriver);
                 } catch (error) {
                     console.error('Error creating driver:', error);
@@ -80,9 +83,44 @@ const useGeneralCreate = () => {
                     console.error('Error join passenger:', error);
                 }
                 break;
+            case 'עדכון נסיעה':
+               const curentDrive = drives.find((drive)=> drive.id ==ID) 
+                const drive: IDrive = {
+                    id: ID,
+                    driver: `${currentDriver.id}`,
+                    leavingTime: object.get('time'),
+                    startingPoint: {
+                        city: object.get('startingPointCity')?.toString() || '',
+                        street: object.get('startingPointStreet')?.toString() || '',
+                        numBuild: object.get('startingPointNum')?.toString() || '',
+                    },
+                    target: {
+                        city: object.get('destinationPointCity')?.toString() || '',
+                        street: object.get('destinationPointStreet')?.toString() || '',
+                        numBuild: object.get('destinationPointNum')?.toString() || '',
+                    },
+                    price: parseInt(object.get('priceOfDrive')?.toString() || '15'),
+                    places: parseInt(object.get('numPlacesOfDrive')?.toString() || '4'),
+                    // passengers: curentDrive?.passengers,
+                    // masseges: curentDrive?.masseges
+                    passengers: [],
+                    masseges: []
+                };
+                try {
+                    axiosDataPut(HTTP.DRIVEURL,drive);
+                } catch (error) {
+                    console.error('Error creating driver:', error);
+                }
+
+                break;
+
         }
     }
     return { generalCreate }
 }
 export default useGeneralCreate;
+
+function axiosDataPut(DRIVEURL: string, drive: IDrive, currentDriver: IDriver) {
+    throw new Error("Function not implemented.");
+}
 

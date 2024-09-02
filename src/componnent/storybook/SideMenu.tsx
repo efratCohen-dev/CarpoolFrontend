@@ -65,7 +65,7 @@ const SideMenu = () => {
                             <Divider />
                             <AddDriver />
                         </Grid>
-                        <CreatDrive />
+                        <CreatDrive title={['יצירת נסיעה חדשה', 'הכנס פרטי נסיעה']}/>
                     </FlexColumn>
                 </Box>
             </Drawer>

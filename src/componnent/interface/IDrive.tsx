@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 export interface IDrive {
-    id?: ObjectId,
+    id?: ObjectId | string,
     driver:String,
     // id:string,
     // driver:string,

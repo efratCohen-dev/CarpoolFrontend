@@ -19,9 +19,11 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import useDelete from "../../hooks/Delete";
 import { HTTP } from "../../HTTPpage.contents";
 import Join from "../login/join";
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { deleteDrive } from "../../store/Drive";
 import EmptyPopUP from '../storybook/EmptyPopUp';
+import PopUP from "../login/PopUP";
+import CreatDrive from "./CreateDrive";
 
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
@@ -32,12 +34,12 @@ interface Props {
     driver: IDriver;
 }
 
-
 const OneDrive: React.FC<Props> = ({ drive, driver }) => {
     const { res, axiosDataDelete } = useDelete(HTTP.DRIVEURL);
     const [currenrDriveID, setCurrenrDriveID] = useState('');
     const [popUp, setPopUP] = useState(false);
     const [chat, setChat] = useState(false);
+    const [editDrive, setEditDrive] = useState(false);
 
     useEffect(() => {
 
@@ -58,8 +60,9 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
 
     };
 
-    const editDrive = (id: string) => {
-        console.log("editDrive", id);
+
+    const handelEditDrive = (id: string) => {
+        setEditDrive(!editDrive);
     };
 
     const handelChat = () => {
@@ -123,17 +126,17 @@ const OneDrive: React.FC<Props> = ({ drive, driver }) => {
                     }
                 />
             </ListItem>
-            <IconButton aria-label="delete" color="primary">
-                <DeleteIcon fontSize="inherit" onClick={() => deleteCurrentDrive(`${drive.id}`)} />
-            </IconButton >
-            <IconButton aria-label="delete" color="primary">
-                <EditIcon fontSize="inherit" onClick={() => editDrive(`${drive.id}`)} />
-            </IconButton>
-            <IconButton color="primary">
-                <ChatBubbleOutlineIcon onClick={() => { handelChat() }} />
-            </IconButton>
-            {chat && <EmptyPopUP name={driver.name} driveID={new String(drive.id)} />}
-            <Divider variant="inset" component="li" />
+            <Box sx={{display:'flex'}}>
+                <IconButton aria-label="delete" color="primary">
+                    <DeleteIcon fontSize="inherit" onClick={() => deleteCurrentDrive(`${drive.id}`)} />
+                </IconButton >
+                <CreatDrive title={['עדכון נסיעה', 'עדכן פרטי נסיעה']} driveID={`${drive.id}`} />
+                <IconButton color="primary">
+                    <ChatBubbleOutlineIcon onClick={() => { handelChat() }} />
+                </IconButton>
+                {chat && <EmptyPopUP name={driver.name} driveID={new String(drive.id)} />}
+                <Divider variant="inset" component="li" />
+            </Box>
         </>
     )
 };
