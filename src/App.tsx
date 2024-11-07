@@ -23,6 +23,7 @@ import { MainProvider } from './componnent/chat/context/MainContext';
 import { SocketProvider } from './componnent/chat/context/SocketContext';
 import { UsersProvider } from './componnent/chat/context/UsersContext';
 import { Flex, FlexSpaceBtween } from './styled/layout.styled';
+import TempChat from './componnent/chatUI/temp';
 
 function App() {
   const cacheRtl = createCache({
@@ -32,26 +33,27 @@ function App() {
 
 
   return (
-    <CacheProvider value={cacheRtl}>
-      <ThemeProvider theme={theme}>
-        <div dir={theme.direction}>
-          {/* <DriversUI /> */}
-          {/* <MainProvider> */}
-          <UsersProvider>
-            <SocketProvider>
-              <Flex>
-                <Search />
-                <FlexSpaceBtween>
-                  <AllDrives />
-                  <SideMenu />
-                </FlexSpaceBtween>
-              </Flex>
-            </SocketProvider>
-          </UsersProvider>
-          {/* </MainProvider> */}
-        </div>
-      </ThemeProvider >
-    </CacheProvider >
+    // <CacheProvider value={cacheRtl}>
+    //   <ThemeProvider theme={theme}>
+    //     <div dir={theme.direction}>
+    //       {/* <DriversUI /> */}
+    //       {/* <MainProvider> */}
+    //       <UsersProvider>
+    //         <SocketProvider>
+    //           <Flex>
+    //             <Search />
+    //             <FlexSpaceBtween>
+    //               <AllDrives />
+    //               <SideMenu />
+    //             </FlexSpaceBtween>
+    //           </Flex>
+    //         </SocketProvider>
+    //       </UsersProvider>
+    //       {/* </MainProvider> */}
+    //     </div>
+    //   </ThemeProvider >
+    // </CacheProvider >
+    <TempChat/>
 
   );
 }
